@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:body>   
+    	<h:form>	
+	    	<table>
+	    		<caption>Role Editor</caption>
+	    		<thead>
+	   				<tr>
+	    				<th>Name</th>
+	    				<th>Beschreibung</th>
+	    				<ui:repeat var="right" value="#{interactionHandler.allUserRights()}">
+	    					<th>${right.toString()}</th>
+			    		</ui:repeat>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<ui:repeat var="userrole" value="#{interactionHandler.allAvailableUserRoles()}">
+	    				<tr>
+		    				<td>${userrole.name}</td>
+		    				<td>${userrole.description}</td>
+		    				<ui:repeat var="right" value="#{interactionHandler.allUserRights()}">
+		    					<td>
+		    						<h:selectBooleanCheckbox value="#{userrole.hasRight(right)}" valueChangeListener="#{editUserRoleRequest.roleChanged}">
+		    							<f:attribute name="attr_role" value="#{userrole}"/>
+		    							<f:attribute name="attr_right" value="#{userright}"/>
+		    						</h:selectBooleanCheckbox>
+		    					</td>
+				    		</ui:repeat>
+		    			</tr>
+	    			</ui:repeat>
+	    		</tbody>
+	    	</table>
+	    	<h:commandButton value="OK" action="#{interactionHandler.editUserRoleRights(editUserRoleRequest)}">
+	    		<f:ajax render="@form" execute="@form"/>
+	    	</h:commandButton>
+	    	<h:commandButton value="CANCEL">
+	    		<f:ajax render="@form"/>
+	    	</h:commandButton>
+	    	<h:outputText value="#{editUserRoleRequest.response}"/>
+    	</h:form>
+    </h:body>
+</html>

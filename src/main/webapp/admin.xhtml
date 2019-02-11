@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:body>
+    
+    	<ui:include src="user-role-edit.xhtml"/>
+    
+    	<h:dataTable value="${interactionHandler.allAvailableUserRoles()}" var="role">
+    		<h:column>
+    			<f:facet name="header">Role</f:facet>
+    			<h:outputText value="${role.name}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Desc</f:facet>
+    			<h:outputText value="${role.description}"/>
+    		</h:column>
+    	</h:dataTable>
+    	
+    
+    	<h:dataTable value="#{interactionHandler.allRegisteredUser()}" var="user" id="user-list">
+    		<h:column>
+    			<f:facet name="header">Username</f:facet>
+    			<h:outputText value="${user.username}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Email</f:facet>
+    			<h:outputText value="${user.email}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Passwrod</f:facet>
+    			<h:outputText value="${user.password}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">last login</f:facet>
+    			<h:outputText value="${user.lastLogin}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Role</f:facet>
+    			<ui:repeat var="role" value="${user.rolesAsList}">
+    				<h:outputText value="${role.name} "/>
+    			</ui:repeat>
+    		</h:column>
+    		
+    	</h:dataTable>
+	    
+    </h:body>
+</html>

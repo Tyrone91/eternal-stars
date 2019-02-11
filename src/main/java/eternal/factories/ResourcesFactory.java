@@ -1,7 +1,6 @@
 package eternal.factories;
 
 import javax.inject.Named;
-import javax.persistence.Entity;
 
 import eternal.game.Resource;
 import eternal.game.Resources;
@@ -21,14 +20,16 @@ public class ResourcesFactory {
         return new ResourcesImpl(metal, crystal, energy);
     }
     
-    @Entity
     private static class ResourcesImpl implements Resources {
         
         private static final String METAL_TYPE = "METAL_TYPE", CRYSTAL_TYPE = "CRYSTAL_TYPE", ENERGY_TYPE = "ENERGY_TYPE";
         
+        private int id;
         
         private Resource metal;
+        
         private Resource crystal;
+        
         private Resource energy;
         
         public ResourcesImpl(long metal, long crystal, long energy) {
@@ -83,11 +84,12 @@ public class ResourcesFactory {
             return true;
         }
         
-        @Entity
-        private class SimpleResource implements Resource {
+        private static class SimpleResource implements Resource {
             
             private String type;
             private long amount;
+            
+            public SimpleResource() {}
             
             public SimpleResource(String type, long amount) {
                 this.type = type;

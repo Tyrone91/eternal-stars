@@ -1,0 +1,25 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+form {
+	padding: 0.5em;
+}
+
+form label {
+	display: block;
+	width: 20em;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 0.1em;
+}
+
+form input[type="password"],
+form input[type="text"]{
+	display: inlie-block;
+	padding: 0.5em;
+	width: 12em;
+	margin-left: 0.5em;
+}

@@ -18,6 +18,9 @@
     	<h:panelGroup rendered="#{sessionContext.loggedIn}" id="loggin-header">
     		<div>
     			<h:outputText value="Hello ${sessionContext.user.username}"/>
+    			<h:commandButton value="logout" action="#{interactionHandler.logout()}">
+    				<f:ajax render="@all" execute="@all" />
+    			</h:commandButton>
     		</div>
     	</h:panelGroup>
     	

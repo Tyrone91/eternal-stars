@@ -7,10 +7,14 @@ import eternal.user.UserRole;
 
 public interface UserRoleAccessObject {
 
-    void storeRole(UserRole role);
+    public void storeRole(UserRole role);
 
-    Set<UserRole> getAllRoles();
+    public Set<UserRole> getAllRoles();
 
-    Optional<UserRole> getRole(String roleName);
+    public Optional<UserRole> getRole(String roleName);
+    
+    public boolean updateRole(UserRole role);
+
+    public boolean refreshRole(UserRole role);
 
 }

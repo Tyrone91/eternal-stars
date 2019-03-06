@@ -43,8 +43,8 @@ public class JPAUserDataAccessObject implements UserDataAccessObject {
     
     @Override
     public synchronized Set<User> fetchAllUsers() {
-        System.out.println("fetching all user");
         try {
+            entityManager.clear();
             return new HashSet<>(entityManager.createQuery("SELECT u FROM User AS u", User.class).getResultList());
             
         } catch(Exception e) {
@@ -71,12 +71,13 @@ public class JPAUserDataAccessObject implements UserDataAccessObject {
     
     @Override
     public synchronized Optional<User> loadUser(String username) {
+        entityManager.clear();
         Optional<User> res = Optional.ofNullable(entityManager.find(User.class, username));
         return res;
     }
 
     @Override
-    public boolean deleteUser(String username) {
+    public synchronized boolean deleteUser(String username) {
         try {
             loadUser(username).ifPresent( u -> {
                 entityManager.getTransaction().begin();
@@ -91,7 +92,7 @@ public class JPAUserDataAccessObject implements UserDataAccessObject {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public synchronized boolean updateUser(User user) {
         try {
             entityManager.getTransaction().begin();
             entityManager.merge(user);

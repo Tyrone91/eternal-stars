@@ -42,8 +42,8 @@ public class JPAUserRoleAccessObject implements UserRoleAccessObject {
             entityManager.persist(role);
             entityManager.flush();
             entityManager.getTransaction().commit();
-            
         } catch(Exception e) {
+            entityManager.clear();
             exceptionHandler.handleException(e);
         }
     }
@@ -54,6 +54,7 @@ public class JPAUserRoleAccessObject implements UserRoleAccessObject {
         try {
             return new HashSet<>(entityManager.createQuery("SELECT role FROM UserRole AS role", UserRole.class).getResultList());
         } catch(Exception e) {
+            entityManager.clear();
             exceptionHandler.handleException(e);
             return Collections.emptySet();
         }
@@ -64,8 +65,39 @@ public class JPAUserRoleAccessObject implements UserRoleAccessObject {
         try {
             return Optional.of(entityManager.find(UserRole.class, roleName));
         } catch(Exception e) {
+            entityManager.clear();
             exceptionHandler.handleException(e);
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public synchronized boolean updateRole(UserRole role) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(role);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch(Exception e) {
+            entityManager.clear();
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+    
+    @Override
+    public synchronized boolean refreshRole(UserRole role) {
+        try {
+            /*
+            entityManager.getTransaction().begin();
+            entityManager.refresh(role);
+            entityManager.getTransaction().commit();
+            */
+            return true;
+        } catch(Exception e) {
+            entityManager.clear();
+            exceptionHandler.handleException(e);
+            return false;
         }
     }
 }

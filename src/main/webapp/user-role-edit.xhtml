@@ -7,8 +7,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 	
     <h:body>   
-    	<h:form>	
-	    	<table>
+    	<h:form styleClass="user-role-table" > <!-- rendered="#{sessionContext.loggedIn}" -->	
+	    	<table >
 	    		<caption>Role Editor</caption>
 	    		<thead>
 	   				<tr>
@@ -20,15 +20,14 @@
 	    			</tr>
 	    		</thead>
 	    		<tbody>
-	    			<ui:repeat var="userrole" value="#{interactionHandler.allAvailableUserRoles()}">
+	    			<ui:repeat var="wrapper" value="#{editUserRoleRequest.roles}">
 	    				<tr>
-		    				<td>${userrole.name}</td>
-		    				<td>${userrole.description}</td>
-		    				<ui:repeat var="right" value="#{interactionHandler.allUserRights()}">
+		    				<td>${wrapper.role.name}</td>
+		    				<td>${wrapper.role.description}</td>
+		    				<ui:repeat var="rightwrapper" value="#{wrapper.rights}">
 		    					<td>
-		    						<h:selectBooleanCheckbox value="#{userrole.hasRight(right)}" valueChangeListener="#{editUserRoleRequest.roleChanged}">
-		    							<f:attribute name="attr_role" value="#{userrole}"/>
-		    							<f:attribute name="attr_right" value="#{userright}"/>
+		    						<h:selectBooleanCheckbox value="#{rightwrapper.selected}">
+		    							<f:ajax render="@form" execute="@form"/>
 		    						</h:selectBooleanCheckbox>
 		    					</td>
 				    		</ui:repeat>
@@ -43,6 +42,7 @@
 	    		<f:ajax render="@form"/>
 	    	</h:commandButton>
 	    	<h:outputText value="#{editUserRoleRequest.response}"/>
+	    	<h:outputText value="#{errorResponse.message}"/>
     	</h:form>
     </h:body>
 </html>

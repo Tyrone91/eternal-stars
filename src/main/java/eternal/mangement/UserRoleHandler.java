@@ -24,6 +24,9 @@ public class UserRoleHandler {
     private UserRoleAccessObject userRoleDOA;
     
     @Inject
+    private UserHandler userHandler;
+    
+    @Inject
     private ExceptionHandler exceptionHandler;
     
     private List<UserRole> roles;
@@ -63,5 +66,22 @@ public class UserRoleHandler {
             exceptionHandler.handleException(e);
             return Optional.empty();
         }
+    }
+    
+    public boolean updateRole(UserRole role) {
+        try {
+            boolean res = userRoleDOA.updateRole(role);
+            roles = loadRoles();
+                
+            return res;
+        } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+    
+    public boolean renameRole(UserRole role, String newName) {
+        throw new UnsupportedOperationException();
+        //TODO: implement
     }
 }

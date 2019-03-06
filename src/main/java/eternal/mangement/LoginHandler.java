@@ -22,7 +22,6 @@ public class LoginHandler {
     }
     
     public Optional<User> login(LoginRequest loginRequest) {
-        System.out.println("Loginrequest");
         
         Optional<User> res = userHandler.find(loginRequest.getUsername());
         if(!res.isPresent() ) {

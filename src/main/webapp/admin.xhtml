@@ -10,19 +10,6 @@
     
     	<ui:include src="user-role-edit.xhtml"/>
     
-    	<h:dataTable value="${interactionHandler.allAvailableUserRoles()}" var="role">
-    		<h:column>
-    			<f:facet name="header">Role</f:facet>
-    			<h:outputText value="${role.name}"/>
-    		</h:column>
-    		
-    		<h:column>
-    			<f:facet name="header">Desc</f:facet>
-    			<h:outputText value="${role.description}"/>
-    		</h:column>
-    	</h:dataTable>
-    	
-    
     	<h:dataTable value="#{interactionHandler.allRegisteredUser()}" var="user" id="user-list">
     		<h:column>
     			<f:facet name="header">Username</f:facet>

@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -30,6 +31,7 @@ public class User implements Serializable {
     private Set<UserRight> rights;
     
     @ManyToMany
+    @JoinTable
     private Set<UserRole> roles;
     
     public User() {

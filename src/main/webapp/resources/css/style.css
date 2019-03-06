@@ -23,3 +23,41 @@ form input[type="text"]{
 	width: 12em;
 	margin-left: 0.5em;
 }
+
+
+.user-role-table th,
+.user-role-table td {
+	padding: 0.3em;
+	text-align: center;
+	font-size: 14px;
+	border: 1px solid black;
+}
+
+.user-role-table caption {
+	text-align: left;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.user-role-table td:nth-child(odd) {
+	background-color: #0039fe1a;
+}
+
+.user-role-table tr:nth-child(odd) {
+	background-color: lightgrey;
+}
+
+.user-role-table thead tr {
+	background-color: grey !important;
+}
+
+.user-role-table table {
+	border-collapse: collapse;
+}
+
+.user-role-table input[type="submit"],
+.user-role-table input[type="button"],
+.user-role-table button {
+	padding: 0.5em;
+	min-width: 8em;
+}

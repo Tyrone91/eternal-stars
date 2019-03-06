@@ -25,7 +25,7 @@ public class GetUserListAction extends AbstractAction<List<User>, Void> {
     }
 
     @Override
-    public List<User> action(User user, Void... args) {
+    protected List<User> action(User user, Void... args) {
         return userHandler.getAllRegisteredUsersAsList();
     }
     

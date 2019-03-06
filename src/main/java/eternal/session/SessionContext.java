@@ -1,9 +1,12 @@
 package eternal.session;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.user.AnonymousUser;
@@ -15,27 +18,33 @@ public class SessionContext implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private static final User ANOYMOUS_USER = new AnonymousUser();
+    @Inject
+    private AnonymousUser anonymousUser;
     
-    private User user;
+    private Optional<User> user;
     
     @PostConstruct
     public void init() {
-        user = ANOYMOUS_USER;
+        user = Optional.empty();
+    }
+    
+    @PreDestroy
+    public void destroyed() {
+        this.user = Optional.empty();
     }
     
     public SessionContext() {}
     
     public User getUser() {
-        return this.user;
+        return this.user.orElse(anonymousUser);
     }
     
     public void setUser(User user) {
-        this.user = user;
+        this.user = Optional.ofNullable(user);
     }
     
     public boolean isLoggedIn() {
-        return ANOYMOUS_USER != user;
+        return user.isPresent();
     }
 
 }

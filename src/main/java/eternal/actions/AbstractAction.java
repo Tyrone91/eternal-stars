@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import eternal.requests.ErrorResponse;
 import eternal.user.User;
 import eternal.user.UserInteraction;
+import eternal.util.ExceptionHandler;
 
 public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Serializable {
 
@@ -15,6 +16,9 @@ public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Seria
     
     @Inject
     private ErrorResponse errorResponse;
+    
+    @Inject
+    private ExceptionHandler exceptionHandler;
 
     @Override
     public boolean isAllowedToPerform(User user) {
@@ -30,6 +34,8 @@ public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Seria
             }
             return Optional.ofNullable(action(user, args));
         } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            error("An unexpected error occured");
             return Optional.empty();
         }
     }

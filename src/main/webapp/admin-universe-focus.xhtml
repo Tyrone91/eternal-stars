@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:body>
+    	<ui:include src="back-control.xhtml" />
+    	<h:outputText value="Sectors in Universe #{universeEditHolder.selectedUniverse.universeId}"/>
+	    <h:dataTable value="#{universeEditHolder.selectedUniverse.sectors}" var="sector">
+    		<h:column>
+    			<f:facet name="header">Sector</f:facet>
+    			<h:outputText value="${sector.id}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Planets</f:facet>
+    			<h:outputText value="${sector.planetCount}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">View</f:facet>
+    			<h:form>
+    				<h:commandButton value="view" action="#{viewControl.showSector(sector)}" />
+    				<h:commandButton value="delete"></h:commandButton>
+    			</h:form>
+    		</h:column>
+    		
+    	</h:dataTable>
+    </h:body>
+</html>

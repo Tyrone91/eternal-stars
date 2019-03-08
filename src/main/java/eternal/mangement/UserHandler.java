@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.game.control.GameAccountRemover;
 import eternal.persistence.UserDataAccessObject;
 import eternal.user.User;
 import eternal.user.UserRole;
@@ -28,6 +29,9 @@ public class UserHandler implements Serializable {
     
     @Inject
     private UserDataAccessObject userDAO;
+    
+    @Inject
+    private GameAccountRemover gameAccountRemover;
     
     public Set<User> getAllRegisteredUsers() {
         return userDAO.fetchAllUsers();
@@ -74,6 +78,7 @@ public class UserHandler implements Serializable {
     
     public boolean deleteUser(String username) {
         try {
+            gameAccountRemover.removeAccount(username); //The GameAccount has the same id as the user. If no GameAccout is found we lost nothing
             return userDAO.deleteUser(username);
         } catch(Exception e) {
             exceptionHandler.handleException(e);

@@ -4,8 +4,14 @@
       xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="eternal-stars-user-db" transaction-type="RESOURCE_LOCAL">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      
       <class>eternal.user.User</class>
       <class>eternal.user.UserRole</class>
+      <class>eternal.game.control.GameAccount</class>
+      <class>eternal.game.environment.Planet</class>
+      <class>eternal.game.environment.Sector</class>
+      <class>eternal.game.environment.Universe</class>
+      
       <properties>
 	        <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 	        
@@ -13,8 +19,11 @@
 	        <property name="hibernate.connection.url" value="jdbc:h2:./database/users;AUTO_SERVER=TRUE"/>
 	        <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 	        
-	        <property name="hibernate.hbm2ddl.auto" value="update"/>
+<!-- 	        <property name="hibernate.hbm2ddl.auto" value="update"/>     -->
 <!-- 	        <property name="hibernate.hbm2ddl.auto" value="create-drop"/>  -->
+			
+			<property name="hibernate.hbm2ddl.auto" value="update"/>  
+
 	        <property name="hibernate.show_sql" value="true" />
 	
       </properties>

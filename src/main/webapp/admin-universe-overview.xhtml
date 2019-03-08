@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:body>
+    	<h:outputText value="Universes"/>
+    	<h:dataTable value="#{interactionHandler.listUniverses()}" var="universe">
+    		<h:column>
+    			<f:facet name="header">Universe</f:facet>
+    			<h:outputText value="${universe.universeId}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Sectors</f:facet>
+    			<h:outputText value="${universe.sectorCount}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Planets</f:facet>
+    			<h:outputText value="${universe.planetCount}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Action</f:facet>
+    			<h:form>
+    				<h:commandButton value="view" action="#{viewControl.showUniverse(universe)}"></h:commandButton>
+    				<h:commandButton value="delete"></h:commandButton>
+    			</h:form>
+    		</h:column>
+    		
+    	</h:dataTable>
+	    
+    </h:body>
+</html>

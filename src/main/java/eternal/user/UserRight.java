@@ -23,7 +23,11 @@ public enum UserRight {
     USER_MANAGMENT_EDIT_ALL_ROLES("edit-role"),
     
     USER_MANAGMENT_DELETE_ROLE("delete-role"),
-    USER_MANAGMENT_DELETE_USER("delete-user(any)");
+    USER_MANAGMENT_DELETE_USER("delete-user(any)"),
+    
+    UNIVERSE_MANAGMENT_EDIT("edit-universes"),
+    UNIVERSE_MANAGMENT_VIEW("view-universes");
+    
     
     private String shorttext;
     

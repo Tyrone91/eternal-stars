@@ -1,12 +1,11 @@
 package eternal.core;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import eternal.util.ExceptionHandler;
 
@@ -14,24 +13,18 @@ import eternal.util.ExceptionHandler;
 @ApplicationScoped
 public class DefaultExceptionHandler implements ExceptionHandler {
     
-    private File log = new File("c:/temp/eternal-logs/exception.log");
+//    private File log = new File("/logs/eternal-exception.txt");
+    private final static Logger LOGGER = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
     
     @PostConstruct
     public void init() {
-        if(!log.exists()) {
-            try {                
-                log.createNewFile();
-            } catch(Exception e) {
-                //e.printStackTrace(System.err);
-            }
-        }
     }
     
     @Override
     public void handleException(Exception ex) {
-        try (FileOutputStream os = new FileOutputStream(log, true)) {
+        try {
             ex.printStackTrace(System.err);
-            ex.printStackTrace( new PrintStream(os));
+            LOGGER.error(ex);
         } catch(Exception e) {
             //e.printStackTrace(System.err);
         }

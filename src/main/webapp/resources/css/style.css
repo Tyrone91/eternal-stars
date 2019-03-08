@@ -61,3 +61,42 @@ form input[type="text"]{
 	padding: 0.5em;
 	min-width: 8em;
 }
+
+.centered-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+} 
+
+.login-background {
+	background-color: black;
+	color: white;
+}
+
+.screen-fit {
+	width: 100vw;
+	height: 100vh;
+}
+
+.login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.login-form .action-group {
+	display: flex;
+	flex-direction: row;
+}
+
+.login-form label {
+	max-width: 12em;
+	margin-left: -12em;
+}
+
+.login-form input[type="submit"] {
+	padding: 0.5em;
+	width: 12em;
+}

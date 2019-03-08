@@ -1,4 +1,4 @@
-package eternal.game;
+package eternal.game.buildable;
 
 public interface BuildingTemplate {
 

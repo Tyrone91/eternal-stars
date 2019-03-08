@@ -1,4 +1,6 @@
-package eternal.game;
+package eternal.game.buildable;
+
+import eternal.game.Resources;
 
 public interface BuildableGameTemplate {
     

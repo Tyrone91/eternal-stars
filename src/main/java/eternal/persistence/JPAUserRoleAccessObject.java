@@ -63,7 +63,7 @@ public class JPAUserRoleAccessObject implements UserRoleAccessObject {
     @Override
     public synchronized Optional<UserRole> getRole(String roleName) {
         try {
-            return Optional.of(entityManager.find(UserRole.class, roleName));
+            return Optional.ofNullable((entityManager.find(UserRole.class, roleName)));
         } catch(Exception e) {
             entityManager.clear();
             exceptionHandler.handleException(e);

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+	
+    <h:body>
+	    <h:form>
+	    	<h:outputLabel value="Username">
+	    		<h:inputText value="#{gameAccountRegistrationRequest.username}"/>
+	    	</h:outputLabel>
+	    	
+	    	<h:outputLabel value="Email">
+	    		<h:inputText value="#{gameAccountRegistrationRequest.email}"/>
+	    	</h:outputLabel>
+	    	
+	    	<h:outputLabel value="Password">
+	    		<h:inputText value="#{gameAccountRegistrationRequest.password}"/>
+	    	</h:outputLabel>
+	    	
+	    	<h:outputLabel value="Confirm password">
+	    		<h:inputText value="#{gameAccountRegistrationRequest.passwordConfirmation}"/>
+	    	</h:outputLabel>
+	    	
+	    	<h:commandButton value="Register" action="#{interactionHandler.registerWithGameAccount(gameAccountRegistrationRequest)}">
+	    		<f:ajax render="@form user-list" execute="@form user-list"/>
+	    	</h:commandButton>
+	    	
+	    	<h:outputText value="#{gameAccountRegistrationRequest.response}"></h:outputText>
+	    	<h:outputText value="#{errorResponse.message}"></h:outputText>
+	    </h:form>
+    </h:body>
+</html>

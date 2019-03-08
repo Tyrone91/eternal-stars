@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import eternal.game.control.GameAccount;
+
 @Entity
 public class User implements Serializable {
     
@@ -34,11 +36,21 @@ public class User implements Serializable {
     @JoinTable
     private Set<UserRole> roles;
     
+    private transient GameAccount gameAccount;
+    
     public User() {
         this.username = "";
         this.rights = new HashSet<>();
         this.roles = new HashSet<>();
         this.lastLogin = null;
+    }
+    
+    public Optional<GameAccount> getGameAccount() {
+        return Optional.ofNullable(gameAccount);
+    }
+    
+    public void setGameAccount(GameAccount account) {
+        gameAccount = account;
     }
     
     public Set<UserRight> getRights() {

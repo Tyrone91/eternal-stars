@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+    <h:body>
+    <h:outputText value="Planets in Sector #{universeEditHolder.selectedSector.id}"/>
+    	<ui:include src="back-control.xhtml" />
+	    <h:dataTable value="#{universeEditHolder.selectedSector.planets}" var="planet">
+	    	<h:column>
+    			<f:facet name="header">ID</f:facet>
+    			<h:outputText value="${planet.planetId}"/>
+    		</h:column>
+    		
+	    	<h:column>
+    			<f:facet name="header">Position</f:facet>
+    			<h:outputText value="${planet.position}"/>
+    		</h:column>
+	    
+    		<h:column>
+    			<f:facet name="header">Name</f:facet>
+    			<h:outputText value="${planet.name}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">User</f:facet>
+    			<h:outputText value="${planet.ownerId}"/>
+    		</h:column>
+    		
+    		<h:column>
+    			<f:facet name="header">Action</f:facet>
+    			<h:form>
+    				<h:commandButton value="view" action="#{viewControl.showSector(sector)}"></h:commandButton>
+    				<h:commandButton value="delete"></h:commandButton>
+    			</h:form>
+    		</h:column>
+    		
+    	</h:dataTable>
+    </h:body>
+</html>

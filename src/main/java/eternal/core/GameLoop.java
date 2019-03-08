@@ -2,10 +2,14 @@ package eternal.core;
 
 import java.util.Set;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import eternal.util.ExceptionHandler;
 
+@Named
+@ApplicationScoped
 public class GameLoop {
     
     @Inject
@@ -30,14 +34,14 @@ public class GameLoop {
         this.objectsToRemove.add(obj);
     }
     
-    public void update() {
+    public void update(Game g) {
         lastTime = System.currentTimeMillis();
         
         objectsToRemove.forEach(updatableObjects::remove);
         objectsToAdd.forEach(updatableObjects::add);
         
         for(Updatable u : updatableObjects) {
-            u.update();
+            u.update(g);
         }
     }
     
@@ -60,6 +64,6 @@ public class GameLoop {
     }
     
     public static interface Updatable {
-        public void update();
+        public void update(Game g);
     }
 }

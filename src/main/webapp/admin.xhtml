@@ -7,38 +7,53 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 	
     <h:body>
-    
+    	<ui:include src="back-control.xhtml" />
+    	<ui:include src="admin-universe-overview.xhtml" />
     	<ui:include src="user-role-edit.xhtml"/>
-    
-    	<h:dataTable value="#{interactionHandler.allRegisteredUser()}" var="user" id="user-list">
-    		<h:column>
-    			<f:facet name="header">Username</f:facet>
-    			<h:outputText value="${user.username}"/>
-    		</h:column>
-    		
-    		<h:column>
-    			<f:facet name="header">Email</f:facet>
-    			<h:outputText value="${user.email}"/>
-    		</h:column>
-    		
-    		<h:column>
-    			<f:facet name="header">Passwrod</f:facet>
-    			<h:outputText value="${user.password}"/>
-    		</h:column>
-    		
-    		<h:column>
-    			<f:facet name="header">last login</f:facet>
-    			<h:outputText value="${user.lastLogin}"/>
-    		</h:column>
-    		
-    		<h:column>
-    			<f:facet name="header">Role</f:facet>
-    			<ui:repeat var="role" value="${user.rolesAsList}">
-    				<h:outputText value="${role.name} "/>
-    			</ui:repeat>
-    		</h:column>
-    		
-    	</h:dataTable>
+    	
+    	<h:form>
+	    	<h:dataTable value="#{userListSortRequest.sort(interactionHandler.allRegisteredUser())}" var="user" id="user-list" styleClass="admin-user-table">
+	    		<h:column>
+	    			<f:facet name="header">
+	    				<h:commandButton value="Username" action="#{userListSortRequest.toggleUsername()}"> <f:ajax render="@form" execute="@this"/></h:commandButton>
+	    			</f:facet>
+	    			<h:outputText value="${user.username}"/>
+	    		</h:column>
+	    		
+	    		<h:column>
+	    			<f:facet name="header">
+	    				<h:commandButton value="Email" action="#{userListSortRequest.toggleEmail()}"> <f:ajax render="@form" execute="@this"/></h:commandButton>
+	    			</f:facet>
+	    			<h:outputText value="${user.email}"/>
+	    		</h:column>
+	    		
+	    		<h:column>
+	    			<f:facet name="header">Passwrod</f:facet>
+	    			<h:outputText value="${user.password}"/>
+	    		</h:column>
+	    		
+	    		<h:column>
+	    			<f:facet name="header">last login</f:facet>
+	    			<h:outputText value="${user.lastLogin}"/>
+	    		</h:column>
+	    		
+	    		<h:column>
+	    			<f:facet name="header">
+	    				<h:commandButton value="Role" action="#{userListSortRequest.toggleRole()}"> <f:ajax render="@form" execute="@this"/></h:commandButton>
+	    			</f:facet>
+	    			<ui:repeat var="role" value="${user.rolesAsList}">
+	    				<h:outputText value="${role.name} "/>
+	    			</ui:repeat>
+	    		</h:column>
+	    		
+	    		<h:column>
+	    			<f:facet name="header">Action</f:facet>
+	    				<h:commandButton value="Delete" action="#{interactionHandler.deleteAnyUser(user)}" onclick="return confirm('Do you relly want to delete the user?')">
+	    					
+	    				</h:commandButton>
+	    		</h:column>
+	    	</h:dataTable>
+    	</h:form>
 	    
     </h:body>
 </html>

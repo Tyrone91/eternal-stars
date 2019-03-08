@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+      
+      <h:head>
+    	<h:outputStylesheet library="css" name="style.css"  />
+        <title>
+        	<h:outputText value="#{eternalStarApp.name}"></h:outputText>
+        </title>
+    </h:head>
+    
+    <h:body>
+    	<h:panelGroup styleClass="centered-content login-background screen-fit">
+    		<h:graphicImage library="images" name="eternal-stars-logo.png" />
+    		
+    		<h:form styleClass="login-form">
+    			
+    			<h:panelGroup styleClass="action-group">
+    				<h:outputLabel for="username-input" value="Username"/>
+    				<h:inputText id="username-input" value="#{loginRequest.username}" />	
+    			</h:panelGroup>
+    			
+    			<h:panelGroup styleClass="action-group">
+    				<h:outputLabel for="password-input" value="Password"/>
+    				<h:inputText id="password-input" value="#{loginRequest.password}" />
+    			</h:panelGroup>
+    			
+    			<h:commandButton value="OK" action="#{interactionHandler.loginWithRedirect(loginRequest)}" >
+	    			
+	    		</h:commandButton>
+	    		
+	    		<h:outputText value="#{loginRequest.response}"></h:outputText>
+	    		<h:outputText value="#{errorResponse.message}"></h:outputText>
+    		</h:form>
+    		
+    		<h:panelGroup>
+    			<ui:include src="game-account-registration.xhtml" />
+    		</h:panelGroup>
+    		
+    	</h:panelGroup>
+    </h:body>
+</html>

@@ -9,6 +9,7 @@
       
       <h:head>
     	<h:outputStylesheet library="css" name="style.css"  />
+    	<h:outputStylesheet library="css" name="game.css"  />
         <title>
         	<h:outputText value="#{eternalStarApp.name}"></h:outputText>
         </title>
@@ -34,7 +35,7 @@
 	    			
 	    		</h:commandButton>
 	    		
-	    		<h:outputText value="#{loginRequest.response}"></h:outputText>
+	    		<h:outputText value="#{loginRequest.response}" styleClass="slow-fade-out"></h:outputText>
 	    		<h:outputText value="#{errorResponse.message}"></h:outputText>
     		</h:form>
     		

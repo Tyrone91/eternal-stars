@@ -124,7 +124,6 @@ public class User implements Serializable {
     }
     
     public void addRole(UserRole role) {
-        System.out.println("role incoming" + role);
         this.roles.add(role);
     }
     

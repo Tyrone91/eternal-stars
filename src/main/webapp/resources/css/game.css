@@ -1,0 +1,211 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+.game-body {
+    display: flex;
+    flex-direction: column;
+    background: black;
+    flex-grow: 1;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    padding: 0.0em 0em 0.5em 0.5em;;
+    box-sizing: border-box;
+}
+.game-header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 30px;
+    align-items: flex-start;
+}
+.game-header .user-view {
+	padding-top: 0.5em;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 1.4em;
+}
+.game-header .user-view a {
+	color: white;
+	margin-left: 0.5em;
+	font-size: 0.75em;
+}
+.fit-to-parent {
+	flex-grow: 1;
+}
+.flex-column {
+	display: flex;
+	flex-direction: column
+}
+.game-header .user-view form {
+	
+}
+.game-header .resource-view {
+
+}
+.game-content-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.game-control-menu,
+.game-header {
+	    padding: 0em 0.0em;
+}
+
+.game-control-menu {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid grey;
+    padding-right: 0.5em;
+}
+.game-control-menu input[type="submit"] {
+    padding: 0.5em;
+    width: 8em;
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+}
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.building-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0em 1em;
+}
+.building-list .building-panel {
+	display: inline-flex;
+	flex-direction: column;
+    border: 2px solid white;
+    padding: 0.5em;
+    max-width: 400px;
+}
+.building-panel .building-title {
+    font-size: 1.3em;
+}
+.building-panel .building-resources {
+    display: flex;
+    flex-direction: row;
+}
+
+.building-panel .building-resources .resource {
+    padding: 0.2em; 
+}
+.resource.resource-metal {
+    color: grey;
+}
+.resource.resource-crystal {
+    color: blue;
+}
+.resource.resource-energy {
+    color: yellow;
+}
+.user-account-edit {
+	display: flex;
+	flex-direction: column;
+}
+.user-account-edit .custom-form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 0em 0em 1em 1em;
+	border: 1px solid white;
+	padding: 1em;
+}
+
+.custom-form .form-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	margin-bottom: 0.3em;
+}
+
+.custom-form input[type="submit"] {
+	padding: 0.3em;
+	width: 4em;
+}
+
+.custom-form input {
+	padding: 0.5em;
+	margin-left: 0.5em;
+}
+.slow-fade-out {
+    animation: fade-out 1500ms 1;
+    animation-delay: 1500ms;
+    animation-fill-mode: forwards;
+}
+@keyframes fade-out {
+    from { 
+    	opacity: 1;
+    }
+    to { 
+    	opacity: 0;
+    	display: none;
+    	height: 0px;
+    }
+}
+
+.sector-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.sector-view-planets {
+    flex-grow: 1;
+}
+
+.sector-view-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.5em;
+}
+.sector-view-planets {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sector-view-direct-selection {
+    margin: 0em 0.5em;
+}
+.sector-view-direct-selection a {
+    margin: 0.0em 0.15em;
+}
+.selected-sector-index {
+	color: red;
+}
+.sector-planet-table {
+    border-collapse: collapse;
+    flex-grow: 1;
+}
+.sector-planet-table thead {
+    background-color: darkgrey;
+}
+.sector-planet-table tbody tr:nth-child(even) {
+    background-color: grey;
+}
+.sector-planet-table th:not(:first-child),
+.sector-planet-table td:not(:first-child) {
+    padding: 0.5em 4em;
+}
+
+.sector-planet-table th,
+.sector-planet-table td {
+    padding: 0.5em 0.5em;
+    text-align: center;
+    border: 2px solid darkgoldenrod;
+}
+
+
+
+

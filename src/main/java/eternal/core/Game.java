@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 @Named
 @ApplicationScoped
-public class Game {
+public class Game implements Runnable {
     
     @Inject
     private GameContext gameContext;
@@ -19,9 +19,10 @@ public class Game {
     
     @PostConstruct
     public void init() {
-        
+        new Thread(this).start();
     }
     
+    @Override
     public void run() {
         while(!shutdown) {
             gameLoop.update(this);
@@ -31,6 +32,10 @@ public class Game {
     
     public GameContext getContext() {
         return gameContext;
+    }
+    
+    public GameLoop getGameLoop() {
+        return gameLoop;
     }
     
 }

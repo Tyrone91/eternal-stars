@@ -2,30 +2,68 @@ package eternal.session;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.LongStream;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import eternal.game.Resources;
+import eternal.game.buildable.Building;
+import eternal.game.control.GameAccount;
+import eternal.game.control.PlanetHandler;
+import eternal.game.environment.Planet;
 
 @Named
 @SessionScoped
 public class GameControls implements Serializable {
     
     private static final long serialVersionUID = 1L;
-
+    
+    @Inject
+    private SessionContext sessionContext;
+    
+    @Inject
+    private PlanetHandler planetHandler;
+    
     private static List<Control> ALL_CONTROLS = Arrays.asList(
             new Control("Overview", "game-overview.xhtml"),
+            new Control("Galaxie", "game-sector-view.xhtml"),
             new Control("Buildings", "game-building.xhtml"),
             new Control("Research", "game-research.xhtml"),
-            new Control("Fleet", "game-fleet.xhtml")
+            new Control("Fleet", "game-fleet.xhtml"),
+            new Control("Account", "game-edit-account.xhtml")
             );
     
     private Control currentFocus;
     
+    private Planet planet;
+    
+    private GameAccount account;
+    
+    private boolean valid() {
+        return planet != null && account != null;
+    }
+    
+    private Optional<GameAccount> account() {
+        return this.sessionContext.getUser().getGameAccount();
+    }
+    
+    private Planet planet(GameAccount account) {
+        return planetHandler.findPlanet(account.getHomePlanetId()).get();
+    }
+    
     @PostConstruct
     public void init() {
         currentFocus = ALL_CONTROLS.get(0);
+        account = account().orElse(null);
+        if(account != null) {
+            planet = planet(account);
+        }
     }
     
     public Control getCurrentFocus() {
@@ -38,6 +76,67 @@ public class GameControls implements Serializable {
     
     public List<Control> getControls() {
         return ALL_CONTROLS;
+    }
+    
+    public List<Building> getBuildings() {
+        if(!valid()) {
+            return Collections.emptyList();
+        }
+        return planet(account().get()).getBuildings();
+    }
+    
+    public long getPlanetMetal() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getPlanetResources().getMetal().getAmount();
+    }
+    
+    public long getPlanetCrystal() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getPlanetResources().getCrystal().getAmount();
+    }
+    
+    public long getPlanetEnergy() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getPlanetResources().getEnergy().getAmount();
+    }
+    
+    public long getPlanetMetalGain() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getGainPerMinute().getMetalAmount();
+    }
+    
+    public long getPlanetCrystalGain() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getGainPerMinute().getCrystalAmount();
+    }
+    
+    public long getPlanetEnergyGain() {
+        if(!valid()) {
+            return 0;
+        }
+        return planet.getGainPerMinute().getEnergyAmount();
+    }
+    
+    public Resources getResourceGainUpgradeDifference(Building building) {
+        Resources res = new Resources(building.getGainPerMinuteAfterUpgrade());
+        res.sub(building.getGainPerMinute());
+        return res;
+    }
+    
+    public boolean buildingHasResourceGain(Building b) {
+        Resources after = b.getGainPerMinuteAfterUpgrade();
+        return LongStream.of(after.getMetalAmount(), after.getCrystalAmount(), after.getEnergyAmount())
+                .anyMatch( i -> i > 0);
     }
 
     public static class Control {

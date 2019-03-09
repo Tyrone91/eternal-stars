@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+     
+    <h:body >
+    	<h:panelGroup styleClass="sector-view" id="sector-view">
+    		<h:panelGroup styleClass="sector-view-planets">
+    			<h:outputText value="System: #{sectorViewHandler.selectedSector.sector.id}"/>
+    			<h:dataTable var="planet" value="#{sectorViewHandler.planetsOfSelectedSector}" styleClass="sector-planet-table">
+    			
+    				<h:column>
+		    			<f:facet name="header">Position</f:facet>
+		    			<h:outputText value="#{planet.position}"/>
+	    			</h:column>
+	    			
+	    			<h:column>
+		    			<f:facet name="header">Name</f:facet>
+		    			<h:outputText value="#{planet.name}"/>
+	    			</h:column>
+	    			
+	    			<h:column>
+		    			<f:facet name="header">Ruler</f:facet>
+		    			<h:outputText value="#{sectorViewHandler.getOwnerNameOfPlanet(planet)}"/>
+	    			</h:column>
+	    			
+	    			<h:column>
+		    			<f:facet name="header">Action</f:facet>
+		    			<h:commandButton value="Trade"></h:commandButton>
+	    			</h:column>
+    	
+    			</h:dataTable>
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="sector-view-controls">
+    		
+	    		<h:commandLink value="&lt;&lt;" action="#{sectorViewHandler.goPrev()}">
+	    			<f:ajax render="sector-view" execute="@this"/>
+	    		</h:commandLink>
+	    		
+	    		<h:panelGroup styleClass="sector-view-direct-selection">
+		    		<ui:repeat var="tuple" value="#{sectorViewHandler.sortedSecotrs}">
+		    			
+	    				<h:commandLink value="#{tuple.index+1}" action="#{sectorViewHandler.selectIndex(tuple.index)}" rendered="#{not sectorViewHandler.isSelected(tuple.index)}">
+	    					<f:ajax render="sector-view" execute="@this"/>	
+	    				</h:commandLink>
+	    				
+	    				<h:commandLink value="#{tuple.index+1}" action="#{sectorViewHandler.selectIndex(tuple.index)}" rendered="#{sectorViewHandler.isSelected(tuple.index)}" styleClass="selected-sector-index">
+	    					<f:ajax render="sector-view" execute="@this"/>	
+	    				</h:commandLink>
+	    				
+		    		</ui:repeat>
+	    		</h:panelGroup>
+	    		
+	    		<h:commandLink value="&gt;&gt;" action="#{sectorViewHandler.goNext()}">
+	    			<f:ajax render="sector-view" execute="@this"/>
+	    		</h:commandLink>
+    		</h:panelGroup>
+    		
+    	</h:panelGroup>
+    </h:body>
+    
+</html>

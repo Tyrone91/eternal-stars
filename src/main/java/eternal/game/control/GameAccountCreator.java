@@ -40,12 +40,14 @@ public class GameAccountCreator {
             }
             
             final Planet planet = new Planet();
+            
             final GameAccount account = new GameAccount();
             
             account.setDisplayName(displayName);
             account.setOwnerId(user);
             
             planet.setOwner(account.getId());
+            planet.onload(game.getContext());
             planetDAO.storePlanet(planet); //Get id
             
             account.setHomePlanetId(planet.getPlanetId());
@@ -53,7 +55,7 @@ public class GameAccountCreator {
             universeHandler.attachNewPlanet(planet);
             planet.setName(getDefaultPlanetNameFor(planet));
             
-            planetDAO.updatePlanet(planet); // we needed the id for insert, but after that we changed the planet agiain so we need to update.
+            planetDAO.updatePlanet(planet); // we needed the id for insert, but after that we changed the planet again so we need to update.
             gameAccountDAO.storeAccount(account);
             
             return Optional.of(account);

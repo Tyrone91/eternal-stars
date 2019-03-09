@@ -12,6 +12,10 @@
       <class>eternal.game.environment.Sector</class>
       <class>eternal.game.environment.Universe</class>
       
+      <class>eternal.game.Resources</class>
+      <class>eternal.game.Resource</class>
+      <class>eternal.game.buildable.Building</class>
+      
       <properties>
 	        <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 	        

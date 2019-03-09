@@ -115,6 +115,7 @@ public class Universe implements Updatable {
         
         Optional<Sector> res = this.sectors.stream().filter( sec -> sec.getId() == sectorId).findAny();
         if(res.isPresent()) {
+            res.get().onload(planetHandler, this);
             fastAccessSectors.put(sectorId, res.get());
         }
         return res;

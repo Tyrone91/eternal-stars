@@ -11,17 +11,17 @@
     	<h:dataTable value="#{interactionHandler.listUniverses()}" var="universe">
     		<h:column>
     			<f:facet name="header">Universe</f:facet>
-    			<h:outputText value="${universe.universeId}"/>
+    			<h:outputText value="#{universe.universeId}"/>
     		</h:column>
     		
     		<h:column>
     			<f:facet name="header">Sectors</f:facet>
-    			<h:outputText value="${universe.sectorCount}"/>
+    			<h:outputText value="#{universe.sectorCount}"/>
     		</h:column>
     		
     		<h:column>
     			<f:facet name="header">Planets</f:facet>
-    			<h:outputText value="${universe.planetCount}"/>
+    			<h:outputText value="#{universe.planetCount}"/>
     		</h:column>
     		
     		<h:column>

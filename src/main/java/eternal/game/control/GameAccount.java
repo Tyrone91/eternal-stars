@@ -3,6 +3,7 @@ package eternal.game.control;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import eternal.core.GameContext;
 import eternal.user.User;
 
 @Entity
@@ -41,5 +42,9 @@ public class GameAccount {
 
     public void setHomePlanetId(int homePlanetId) {
         this.homePlanetId = homePlanetId;
+    }
+    
+    public void onload(GameContext context) {
+            
     }
 }

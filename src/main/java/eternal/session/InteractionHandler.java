@@ -10,6 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.actions.DeleteAnyUserAction;
+import eternal.actions.EditOwnEmailAction;
+import eternal.actions.EditOwnNicknameAction;
+import eternal.actions.EditOwnPasswordAction;
 import eternal.actions.EditRolesAction;
 import eternal.actions.GetUserListAction;
 import eternal.actions.GetUserRightsAction;
@@ -17,9 +20,14 @@ import eternal.actions.GetUserRolesListAction;
 import eternal.actions.LoginAction;
 import eternal.actions.LogoutAction;
 import eternal.actions.RegistrationAction;
+import eternal.actions.UpgradeBuildingAction;
 import eternal.actions.ViewUniversesAction;
+import eternal.game.buildable.Building;
 import eternal.game.control.GameAccountCreator;
 import eternal.game.environment.Universe;
+import eternal.requests.EditEmailRequest;
+import eternal.requests.EditNicknameRequest;
+import eternal.requests.EditPasswordRequest;
 import eternal.requests.EditUserRoleRequest;
 import eternal.requests.GameAccountRegistrationRequest;
 import eternal.requests.LoginRequest;
@@ -33,6 +41,9 @@ import eternal.user.UserRole;
 public class InteractionHandler implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    @Inject
+    private ViewControl viewControl;
     
     @Inject
     private GameAccountCreator gameAccountCreator;
@@ -67,6 +78,18 @@ public class InteractionHandler implements Serializable {
     @Inject
     private DeleteAnyUserAction deleteAnyUserAction;
     
+    @Inject
+    private EditOwnEmailAction editOwnEmailAction;
+    
+    @Inject
+    private EditOwnNicknameAction editOwnNicknameAction;
+    
+    @Inject
+    private EditOwnPasswordAction editOwnPasswordAction;
+    
+    @Inject
+    private UpgradeBuildingAction upgradeBuildingAction;
+    
     public Optional<User> login(LoginRequest request) {
         return loginAction.performAction(sessionContext.getUser(), request);
     }
@@ -74,7 +97,12 @@ public class InteractionHandler implements Serializable {
     public String loginWithRedirect(LoginRequest request) {
         Optional<User> user = login(request);
         if(user.isPresent()) {
-            return "/game.xhtml";
+            if(user.get().getGameAccount().isPresent()) {
+                return viewControl.pushPage("/game.xhtml");
+            } else {
+                return viewControl.showAdminPage();
+            }
+            
         } else {
             return "";
         }
@@ -130,5 +158,21 @@ public class InteractionHandler implements Serializable {
     
     public boolean deleteAnyUser(User target) {
         return deleteAnyUserAction.performAction(sessionContext.getUser(), target).orElse(false);
+    }
+    
+    public boolean editOwnEmail(EditEmailRequest request) {
+        return editOwnEmailAction.performAction(sessionContext.getUser(), request).orElse(false);
+    }
+    
+    public boolean editOwnNickname(EditNicknameRequest request) {
+        return editOwnNicknameAction.performAction(sessionContext.getUser(), request).orElse(false);
+    }
+    
+    public boolean editOwnPassword(EditPasswordRequest request) {
+        return editOwnPasswordAction.performAction(sessionContext.getUser(), request).orElse(false);
+    }
+    
+    public boolean upgradeBuilding(Building building) {
+        return upgradeBuildingAction.performAction(sessionContext.getUser(), building).orElse(false);
     }
 }

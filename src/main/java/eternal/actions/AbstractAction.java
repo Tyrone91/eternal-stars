@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import eternal.requests.ErrorResponse;
+import eternal.requests.RequestResponse;
 import eternal.user.User;
 import eternal.user.UserInteraction;
 import eternal.util.ExceptionHandler;
@@ -16,6 +17,9 @@ public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Seria
     
     @Inject
     private ErrorResponse errorResponse;
+    
+    @Inject
+    private RequestResponse requestResponse;
     
     @Inject
     private ExceptionHandler exceptionHandler;
@@ -49,5 +53,6 @@ public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Seria
     
     protected void error(String message) {
         errorResponse.setMessage(message);
+        requestResponse.setMessage(message);
     }
 }

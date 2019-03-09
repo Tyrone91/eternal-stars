@@ -3,6 +3,7 @@ package eternal.game.control;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -51,7 +52,11 @@ public class UniverseHandler {
     }
     
     public synchronized List<Universe> getUniverseList() {
-        return universeDAO.loadAll();
+        List<Universe> unis = universeDAO.loadAll();
+        for(Universe u : unis) {
+            u.onload(planetHandler, gameContext, loadSectorOf(u));
+        }
+        return unis;
     }
     
     public synchronized void initUniverse(Universe universe) {
@@ -99,7 +104,8 @@ public class UniverseHandler {
             this.updateSector(affectedSector.get());
         }
         
-        return false;
+        p.onremove(gameContext);
+        return true;
     }
     
     public synchronized boolean updateSector(Optional<Sector> sec) {
@@ -140,7 +146,7 @@ public class UniverseHandler {
     }
     
     private Set<Sector> loadSectorOf(Universe uni ) {
-        return uni.getSectorIDs().stream()
+        return new TreeSet<>(uni.getSectorIDs()).stream()
                 .map(universeDAO::findSector)
                 .filter(Optional::isPresent)
                 .map(Optional::get)

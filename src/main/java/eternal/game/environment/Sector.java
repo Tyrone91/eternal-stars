@@ -1,13 +1,18 @@
 package eternal.game.environment;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -15,6 +20,7 @@ import javax.persistence.OneToOne;
 import eternal.core.Game;
 import eternal.core.GameLoop.Updatable;
 import eternal.game.control.PlanetHandler;
+import eternal.util.Equals;
 
 @Entity
 public class Sector implements Updatable {
@@ -27,10 +33,11 @@ public class Sector implements Updatable {
     
     @Id
     @GeneratedValue
+    @Column(name = "SECTOR_ID")
     private int sectorId;
     
-    @ElementCollection
-    private Set<Integer> planetIds = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Collection<Integer> planetIds = new HashSet<>();
     
     @OneToOne
     private Sector nextSector;
@@ -43,9 +50,10 @@ public class Sector implements Updatable {
     }
     
     public boolean insert(Planet planet) {
-        if(hasSpace() && planetIds.add(planet.getPlanetId()) ) {
+        if(hasSpace() ) {
             planet.setSector(this.sectorId);
             planet.setPosition(getFreeSlot());
+            return planetIds.add(planet.getPlanetId());
         }
         return false;
     }
@@ -77,6 +85,7 @@ public class Sector implements Updatable {
     public void onload(PlanetHandler handler, Universe parent) {
         this.planetHandler = handler;
         this.parentUniverse = parent;
+        this.planetIds = new TreeSet<>(this.planetIds);
     }
     
     private int getFreeSlot() {
@@ -108,6 +117,9 @@ public class Sector implements Updatable {
     }
     
     public List<Planet> getPlanets() {
+        if(planetHandler == null) {
+            return Collections.emptyList();
+        }
         return this.planetIds.stream()
             .map(planetHandler::findPlanet)
             .filter(Optional::isPresent)
@@ -129,18 +141,18 @@ public class Sector implements Updatable {
     
     @Override
     public boolean equals(Object obj) {
-        /*return Equals
+        return Equals
                 .isNotNull(obj)
                 .isInstance(Sector.class)
                 .checkIf( (s1,s2) -> s1.sectorId == s2.sectorId )
-                .isEqualTo(this);*/
-        return super.equals(obj); //TODO: work on this.
+                .isEqualTo(this);
+        //return super.equals(obj); //TODO: work on this.
     }
     
     @Override
     public int hashCode() {
-       //return this.sectorId;
-       return super.hashCode(); //TODO: work on this.
+       return this.sectorId;
+       //return super.hashCode(); //TODO: work on this.
     }
 
 }

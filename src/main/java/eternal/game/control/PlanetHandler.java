@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.core.GameContext;
 import eternal.game.environment.Planet;
 import eternal.persistence.PlanetDataAccessObject;
 
@@ -19,6 +20,9 @@ public class PlanetHandler {
     
     @Inject
     private PlanetDataAccessObject planetDAO;
+    
+    @Inject
+    private GameContext context;
     
     private Map<Integer, Planet> cachedPlanets = new HashMap<>();
     
@@ -44,6 +48,7 @@ public class PlanetHandler {
         
         Optional<Planet> res = this.planetDAO.findPlanet(planetId);
         res.ifPresent( pl -> cachedPlanets.put(planetId, pl));
+        res.ifPresent( pl -> pl.onload(context));
         
         return res;
     }

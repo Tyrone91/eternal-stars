@@ -1,16 +1,20 @@
 package eternal.dev;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import eternal.game.control.GameAccountCreator;
 import eternal.mangement.UserHandler;
 import eternal.mangement.UserRoleHandler;
 import eternal.persistence.UserRoleAccessObject;
+import eternal.session.InteractionHandler;
+import eternal.user.User;
 import eternal.user.UserRole;
 
-@Named
+
 @ApplicationScoped
 public class DemoInit {
     
@@ -19,6 +23,12 @@ public class DemoInit {
     
     @Inject
     UserRoleAccessObject userRoleDOA;
+    
+    @Inject
+    InteractionHandler interactionHandler;
+    
+    @Inject
+    private GameAccountCreator accountCreator;
     
     @Inject
     UserHandler userHandler;
@@ -32,6 +42,18 @@ public class DemoInit {
         
         createIfNotExists("[SYS_ADMIN]", "admin", userRoleHandler.findRole(UserRole.ADMIN.getName()).orElse(UserRole.ADMIN));
         createIfNotExists("Test01", "123", userRoleHandler.findRole(UserRole.NORMAL_USER.getName()).orElse(UserRole.NORMAL_USER));
+        
+        //insertRandomUser("DEMO_ACCOUNT_PW_123", 23);
+    }
+    
+    private void insertRandomUser(String name, int count) {
+        for(int i = 0; i < count; ++i) {
+            String userName = name + "_" + i;
+            Optional<User> user = createIfNotExists(userName,"123", userRoleHandler.findRole(UserRole.NORMAL_USER.getName()).orElse(UserRole.NORMAL_USER));
+            if(user.isPresent()) {
+                accountCreator.createGameAccount(user.get(), userName);
+            }
+        }
     }
     
     private void createIfNotExists(UserRole role) {
@@ -40,12 +62,13 @@ public class DemoInit {
         }
     }
     
-    private void createIfNotExists(String user, String pw, UserRole role) {
+    private Optional<User> createIfNotExists(String user, String pw, UserRole role) {
         if(!userHandler.find(user).isPresent()) {            
-            userHandler.createNewUser(user, pw, "user@eternal-demo.com", role);
+            return userHandler.createNewUser(user, pw, "user@eternal-demo.com", role);
         }
+        return Optional.empty();
     }
-    
+
     public void createDemoGame() {
         
     }

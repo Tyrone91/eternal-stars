@@ -1,11 +1,22 @@
 package eternal.game.environment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import eternal.core.Game;
+import eternal.core.GameContext;
 import eternal.core.GameLoop.Updatable;
+import eternal.game.Resources;
+import eternal.game.buildable.Building;
+import eternal.game.buildable.BuildingTemplate;
 
 @Entity
 public class Planet implements Updatable {
@@ -16,13 +27,42 @@ public class Planet implements Updatable {
     
     private String gameAccountId;
     
-    //private Resources planetResources;
+    @JoinColumn
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Resources planetResources = new Resources(0, 0, 0);
     
     private String planetName;
     
     private int planetPosition;
     
     private int sectorId;
+    
+    @OneToMany(
+            mappedBy = "owner",
+            cascade  = CascadeType.ALL,
+            orphanRemoval = true
+            )
+    private List<Building> buildings;
+    
+    public void onload(GameContext context) {
+        if(buildings == null || buildings.isEmpty()) {
+            final ArrayList<Building> tmp = new ArrayList<>();
+            for(BuildingTemplate template : context.getBuildingsTemplates()) {
+                final Building b = new Building(template, this);
+                b.setLevel(template.getStartLevel());
+                b.onload(context);
+                tmp.add(b);
+            }
+            buildings = tmp;
+        } else {
+            buildings.stream().forEach(b -> b.onload(context));
+        }
+        context.getGame().getGameLoop().addObject(this);
+    }
+    
+    public void onremove(GameContext context) {
+        context.getGame().getGameLoop().removeObject(this);
+    }
     
     public int getPlanetId() {
         return planetId;
@@ -39,7 +79,7 @@ public class Planet implements Updatable {
     public void setOwner(String ownerId) {
         this.gameAccountId = ownerId;
     }
-    /*
+    
     public Resources getPlanetResources() {
         return planetResources;
     }
@@ -47,7 +87,7 @@ public class Planet implements Updatable {
     public void setPlanetResources(Resources planetResources) {
         this.planetResources = planetResources;
     }
-    */
+    
 
     public String getName() {
         return planetName;
@@ -72,10 +112,23 @@ public class Planet implements Updatable {
     public void setSector(int sector) {
         this.sectorId = sector;
     }
+    
+    public List<Building> getBuildings() {
+        return this.buildings;
+    }
+    
+    public Resources getGainPerMinute() {
+        return this.buildings.stream().map(Building::getGainPerMinute).reduce( new Resources(), (ores, nres) -> {
+            ores.add(nres);
+            return ores;
+        });
+    }
 
     @Override
     public void update(Game g) {
-        
+        for(Building b: buildings) {
+            b.update(g);
+        }
     }
 
 }

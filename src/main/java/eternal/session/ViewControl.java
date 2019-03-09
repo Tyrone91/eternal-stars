@@ -77,4 +77,12 @@ public class ViewControl implements Serializable {
         }
     }
     
+    public String getDisplayName() {
+        if(sessionContext.getUser().getGameAccount().isPresent()) {
+            String name = sessionContext.getUser().getGameAccount().get().getDisplayName(); 
+            return (name == null || name.isEmpty()) ? sessionContext.getUser().getUsername() : name;
+        }
+        return sessionContext.getUser().getUsername();
+    }
+    
 }

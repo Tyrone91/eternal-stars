@@ -1,6 +1,15 @@
 package eternal.game;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Resource {
+    
+    @Id
+    @GeneratedValue
+    private int id;
     
     private String type;
     private long amount;
@@ -27,11 +36,16 @@ public class Resource {
     }
     
     protected Resource amount(long inc) {
-        if(Long.MAX_VALUE - inc < this.amount) {
-            this.amount = Long.MAX_VALUE;
-        } else {                    
+        if(inc > 0) {
+            if(Long.MAX_VALUE - inc < this.amount) {
+                this.amount = Long.MAX_VALUE;
+            } else {                    
+                this.amount += inc;
+            }
+        } else {
             this.amount += inc;
         }
+        
         if(amount < 0) {
             amount = 0;
         }

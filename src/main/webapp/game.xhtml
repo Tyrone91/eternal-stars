@@ -9,28 +9,33 @@
       
       <h:head>
     	<h:outputStylesheet library="css" name="game.css"  />
+    	<h:outputScript library="js" name="main.js" />
         <title>
         	<h:outputText value="#{eternalStarApp.name}"></h:outputText>
         </title>
     </h:head>
     
-    <h:body >
-    	<h:panelGroup styleClass="game-header"></h:panelGroup>
-    		<ui:include src="game-header.xhtml"/>
-    	<h:panelGroup styleClass="game-content-wrapper">
-    		<h:form styleClass="game-control-menu">
-    			
-    			<ui:repeat var="control" value="#{gameControls.controls}">
-    				<h:commandButton value="#{control.label}" action="#{gameControls.setCurrentFocus(control)}">
-						<f:ajax execute="@form" render="main-content"/>
-					</h:commandButton>
-    			</ui:repeat>    	
-    		</h:form>
-    		
-    		<h:panelGroup styleClass="main-content" id="main-content">
-    			<ui:include src="#{gameControls.currentFocus.outcome}"/>
-    		</h:panelGroup>
-    	</h:panelGroup>	
+    
+    <h:body styleClass="game-body">
+	    <h:form prependId="false" styleClass="fit-to-parent flex-column">
+	    	<h:panelGroup styleClass="game-header" id="game-header">
+	    		<ui:include src="game-header.xhtml"/>
+	    	</h:panelGroup>
+	    	<h:panelGroup styleClass="game-content-wrapper">
+	    		<h:panelGroup styleClass="game-control-menu">
+	    			
+	    			<ui:repeat var="control" value="#{gameControls.controls}">
+	    				<h:commandButton value="#{control.label}" action="#{gameControls.setCurrentFocus(control)}">
+							<f:ajax execute="@this" render="main-content"/>
+						</h:commandButton>
+	    			</ui:repeat>    	
+	    		</h:panelGroup>
+	    		
+	    		<h:panelGroup styleClass="main-content" id="main-content" >
+	    			<ui:include src="#{gameControls.currentFocus.outcome}"/>
+	    		</h:panelGroup>
+	    	</h:panelGroup>
+	    </h:form>	
     </h:body>
     
 </html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+     
+    <h:body>
+    <h:panelGrid styleClass="user-account-edit">
+    	<h:panelGroup styleClass="custom-form" id="edit-nickname-form">
+    		<h:panelGroup styleClass="form-group">
+	    		<h:outputLabel value="Nickname" for="nickname-input"/>
+	    		<h:inputText id="nickname-input" value="#{editNicknameRequest.nickname}"/>
+    		</h:panelGroup>
+    		
+    		<h:commandButton value="OK" action="#{interactionHandler.editOwnNickname(editNicknameRequest)}">
+    			<f:ajax execute="@form" render="edit-nickname-form header-user-information"/>
+    		</h:commandButton>
+    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    	</h:panelGroup>
+    	
+    	<h:panelGroup styleClass="custom-form" id="edit-email-form">    	
+    		<h:panelGroup styleClass="form-group">	
+	    		<h:outputLabel value="Email" for="email-input"/>
+	    		<h:inputText id="email-input" value="#{editEmailRequest.email}"/>
+    		</h:panelGroup>
+    		
+    		<h:commandButton value="OK" action="#{interactionHandler.editOwnEmail(editEmailRequest)}">
+    			<f:ajax execute="@form" render="edit-email-form"/>
+    		</h:commandButton>
+    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    	</h:panelGroup>
+    	
+    	<h:panelGroup styleClass="custom-form" id="edit-password-form">
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Current password" for="current-password-input"/>
+    			<h:inputText id="current-password-input" value="#{editPasswordRequest.oldPassword}"/>
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+	    		<h:outputLabel value="New password" for="new-password-input"/>
+	    		<h:inputText id="new-password-input" value="#{editPasswordRequest.newPassword}"/>
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+	    		<h:outputLabel value="Confirm new password" for="confirm-new-password-input"/>
+	    		<h:inputText id="confirm-new-password-input" value="#{editPasswordRequest.newPasswordConfirm}"/>
+    		</h:panelGroup>
+    		
+    		<h:commandButton value="OK" action="#{interactionHandler.editOwnPassword(editPasswordRequest)}">
+    			<f:ajax execute="@form" render="edit-password-form"/>
+    		</h:commandButton>
+    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    	</h:panelGroup>
+    	</h:panelGrid>
+    </h:body>
+</html>

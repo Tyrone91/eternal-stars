@@ -8,18 +8,32 @@
       >
      
     <h:body>
-    	
-    	<h:panelGroup styleClass="user-view">
+    	<h:graphicImage library="images" name="eternal-stars-logo.png" />
+    	<h:panelGroup styleClass="user-view" id="header-user-information">
     		<h:outputText value="Hallo:"/>
-    		<h:outputText value="#{sessionContext.user.username}"/>
-    		<h:form>
-    			<h:commandButton value="logut" action="#{interactionHandler.logoutWithRedirect()}"/>
+    		<h:outputText value="#{viewControl.displayName}"/>
+    		<h:panelGroup>
+    			<h:commandLink value="logut" action="#{interactionHandler.logoutWithRedirect()}"/>
     			<h:commandLink value="Admin" action="#{viewControl.showAdminPage()}" rendered="#{viewControl.hasRightByName('ADMIN_CONTROLS')}"/>
-    		</h:form>
+    		</h:panelGroup>
     	</h:panelGroup>
     	
-    	<h:panelGroup styleClass="resource-view">
+    	<h:panelGroup styleClass="resource-view" id="resource-view">
+    		 
+    		<h:outputText value="Metal: #{gameControls.planetMetal} (+#{gameControls.planetMetalGain})" styleClass="resource resource-metal"/>
+    		<h:outputText value="Crystal: #{gameControls.planetCrystal} (+#{gameControls.planetCrystalGain})" styleClass="resource resource-crystal"/>
+    		<h:outputText value="Energy: #{gameControls.planetEnergy} (+#{gameControls.planetEnergyGain})" styleClass="resource resource-energy"/>
+    		 
+    		 
+    		<!--
+    		<h:outputText value="Metal: #{gameControls.planetMetal}" styleClass="resource resource-metal"/>
+    		<h:outputText value="Crystal: #{gameControls.planetCrystal}" styleClass="resource resource-crystal"/>
+    		<h:outputText value="Energy: #{gameControls.planetEnergy}" styleClass="resource resource-energy"/>
+    		-->
     		
+    		<h:commandButton id="placeholder-resource-pull-button">
+    			<f:ajax render="resource-view" execute="@this" onerror="stopPullingResources"/>
+    		</h:commandButton>
     	</h:panelGroup>
     	
     </h:body>

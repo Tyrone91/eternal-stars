@@ -14,6 +14,9 @@ import eternal.requests.RequestResponse;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * This actions allows the user to change his nickname.
+ */
 @Named
 @SessionScoped
 public class EditOwnNicknameAction extends AbstractAction<Boolean, EditNicknameRequest> implements Serializable {

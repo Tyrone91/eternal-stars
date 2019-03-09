@@ -9,6 +9,9 @@ import eternal.requests.RegistrationRequest;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Allows the registration of a new user.
+ */
 @Named
 @SessionScoped
 public class RegistrationAction extends AbstractAction<User, RegistrationRequest> {

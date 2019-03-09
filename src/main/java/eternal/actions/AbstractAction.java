@@ -11,6 +11,13 @@ import eternal.user.User;
 import eternal.user.UserInteraction;
 import eternal.util.ExceptionHandler;
 
+/**
+ * Base class for all other actions.
+ * Validates if the given user has the needed right to do the action.
+ *
+ * @param <R>
+ * @param <T>
+ */
 public abstract class AbstractAction<R,T> implements UserInteraction<R,T>, Serializable {
 
     private static final long serialVersionUID = 1L;

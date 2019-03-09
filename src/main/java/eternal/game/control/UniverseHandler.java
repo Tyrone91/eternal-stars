@@ -16,6 +16,10 @@ import eternal.game.environment.Sector;
 import eternal.game.environment.Universe;
 import eternal.persistence.UniverseDataAccessObject;
 
+/**
+ * Management class to abstract the DB and programm logic.
+ * All universe related stuff should over this class.
+ */
 @Named
 @ApplicationScoped
 public class UniverseHandler {
@@ -79,6 +83,11 @@ public class UniverseHandler {
         return universeDAO.updateuniverse(uni);
     }
     
+    /**
+     * Attaches a new planet in the universe.
+     * If no free {@link Sector} is found a new one will be created.
+     * @param p
+     */
     public synchronized void attachNewPlanet(Planet p) {
         Sector target = this.currentUniverse.attachNewPlanet(p);
         if(target.getPlanetCount() == 1) { // this means this is an new sector otherwise it would have at least two planets.
@@ -92,6 +101,12 @@ public class UniverseHandler {
         
     }
     
+    /**
+     * Detaches a planet from the universe.
+     * Will remove empty {@link Sector} too.
+     * @param p
+     * @return
+     */
     public boolean detachPlanet(Planet p) {
         Optional<Sector> affectedSector = this.currentUniverse.detachSector(p);
         if(!affectedSector.isPresent()) {

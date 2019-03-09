@@ -18,6 +18,10 @@ import eternal.game.Resources;
 import eternal.game.buildable.Building;
 import eternal.game.buildable.BuildingTemplate;
 
+/**
+ * The virtual physical home of an player in the universe.
+ * The planets created resources and is the anchor for future fleets.
+ */
 @Entity
 public class Planet implements Updatable {
     

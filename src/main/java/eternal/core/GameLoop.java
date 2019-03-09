@@ -9,6 +9,12 @@ import javax.inject.Named;
 
 import eternal.util.ExceptionHandler;
 
+/**
+ * Abstraction for the main loop of the game.
+ * The loop is designed to insert and remove objects without disturbing the current loop.
+ * Objects will be removed before the next loop.
+ * The loop tracks the time how long a cycle needed to complete and will sleep till the wanted FPS/UPS is achieved.
+ */
 @Named
 @ApplicationScoped
 public class GameLoop {
@@ -31,10 +37,18 @@ public class GameLoop {
         
     }
     
+    /**
+     * Adds an object to the add list. Object will be inserted at the beginning of the next loop.
+     * @param obj
+     */
     public synchronized void addObject(Updatable obj) {
         this.objectsToAdd.add(obj);
     }
     
+    /**
+     * Adds an object to the remove list. Te object will be removed before the beginning of the next loop
+     * @param obj
+     */
     public synchronized void removeObject(Updatable obj) {
         this.objectsToRemove.add(obj);
     }
@@ -54,6 +68,11 @@ public class GameLoop {
         }
     }
     
+    /**
+     * Returns immediately if the target FPS/UPS is already reached.
+     * If not the function will try to sleep till the target is reached and return then.
+     * @param targetFps
+     */
     public void sleep(double targetFps) {
         elapsedTime = System.currentTimeMillis() - lastTime;
         double timeToWait = (1000f / targetFps);
@@ -71,10 +90,21 @@ public class GameLoop {
         }
     }
     
+    /**
+     * Returns the elapsed time between the last loop and the current one.
+     * @return
+     */
     public double getElapsedTime() {
         return this.elapsedTime;
     }
     
+    /**
+     * The elapsed time can the very small.
+     * For 60 FPS/UPS 16ms. For some calculations this is to small.
+     * The accumulated elapsed time counts till one second before it will be reseted 
+     * and can be used by calculations that needed bigger numbers.
+     * @return
+     */
     public double getElapsedTimeAccumulated() {
         return accElapsedTime;
     }

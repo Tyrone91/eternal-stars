@@ -7,8 +7,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.game.environment.Planet;
+import eternal.game.environment.Sector;
 import eternal.persistence.GameAccountDataAccessObject;
 
+/**
+ * Management class to remove a {@link GameAccount}.
+ * Because we don't want empty {@link Sector} we have to delete not only the planet.
+ */
 @Named
 @ApplicationScoped
 public class GameAccountRemover {

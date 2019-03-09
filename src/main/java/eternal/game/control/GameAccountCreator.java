@@ -13,6 +13,11 @@ import eternal.persistence.PlanetDataAccessObject;
 import eternal.user.User;
 import eternal.util.ExceptionHandler;
 
+/**
+ * Management class to create {@link GameAccount} for a given user.
+ * This class will be responsible for creating the homeplanet too and will
+ * store both in the DB.
+ */
 @Named
 @ApplicationScoped
 public class GameAccountCreator {

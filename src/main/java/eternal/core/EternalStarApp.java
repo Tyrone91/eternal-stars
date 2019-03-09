@@ -10,11 +10,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.dev.DemoInit;
-import eternal.game.control.PlanetHandler;
 import eternal.game.control.UniverseHandler;
 import eternal.game.environment.Sector;
 import eternal.game.environment.Universe;
 
+/**
+ * Holder object for some not relevant data like version and displayed name.
+ */
 @Named
 @ApplicationScoped
 public class EternalStarApp implements Serializable {
@@ -26,11 +28,6 @@ public class EternalStarApp implements Serializable {
     
     @Inject
     private UniverseHandler universeHandler;
-    
-    @Inject
-    private PlanetHandler planetHandler;
-    
-    private Game game;
 
     public EternalStarApp() {}
    
@@ -53,6 +50,6 @@ public class EternalStarApp implements Serializable {
     }
     
     public String getVersion() {
-        return "0.0.1";
+        return "0.5.0";
     }
 }

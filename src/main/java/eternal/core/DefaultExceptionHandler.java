@@ -9,6 +9,10 @@ import org.apache.logging.log4j.Logger;
 
 import eternal.util.ExceptionHandler;
 
+/**
+ * Base class to handle exception that cannot be handled by the source class.
+ * Till now only logging.
+ */
 @Named
 @ApplicationScoped
 public class DefaultExceptionHandler implements ExceptionHandler {

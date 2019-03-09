@@ -12,6 +12,9 @@ import eternal.requests.RequestResponse;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * This action allows a user to change his own email.
+ */
 @Named
 @SessionScoped
 public class EditOwnEmailAction extends AbstractAction<Boolean, EditEmailRequest> implements Serializable {

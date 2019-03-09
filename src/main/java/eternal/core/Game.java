@@ -5,6 +5,10 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+/**
+ * Holder class for the {@link GameContext} and the {@link GameLoop}.
+ * Runs the updates in a endless loop.
+ */
 @Named
 @ApplicationScoped
 public class Game implements Runnable {

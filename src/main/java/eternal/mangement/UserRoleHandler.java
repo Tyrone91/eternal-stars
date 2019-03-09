@@ -24,18 +24,14 @@ public class UserRoleHandler {
     private UserRoleAccessObject userRoleDOA;
     
     @Inject
-    private UserHandler userHandler;
-    
-    @Inject
     private ExceptionHandler exceptionHandler;
     
     private List<UserRole> roles;
     
     @PostConstruct
     public void init() {
-        System.out.println("------------------------------------------------- before loaded roles");
         roles = loadRoles();
-        System.out.println("------------------------------------------------- loaded roles");
+    
     }
     
     private List<UserRole> loadRoles() {

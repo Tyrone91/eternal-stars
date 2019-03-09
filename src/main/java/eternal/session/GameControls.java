@@ -18,6 +18,13 @@ import eternal.game.control.GameAccount;
 import eternal.game.control.PlanetHandler;
 import eternal.game.environment.Planet;
 
+/**
+ * Helps the user the navigate in the application.
+ * Contains the description for the main menu and allows the
+ * setting of the main content via a public interface.
+ * A ajax render main-content will still be needed to see the actual change.
+ * The class provides some helper function to be used by EL in JSF.
+ */
 @Named
 @SessionScoped
 public class GameControls implements Serializable {
@@ -33,8 +40,6 @@ public class GameControls implements Serializable {
     public final static Control OVERVIEW = new Control("Overview", "game-overview.xhtml");
     public final static Control GALAXIE = new Control("Galaxie", "game-sector-view.xhtml");
     public final static Control BUILDINGS = new Control("Buildings", "game-building.xhtml");
-    public final static Control RESEARCH = new Control("Research", "game-research.xhtml");
-    public final static Control FLEET = new Control("Fleet", "game-fleet.xhtml");
     public final static Control TRADE = new Control("Trade", "game-trade-offer.xhtml");
     public final static Control ACCOUNT = new Control("Account", "game-edit-account.xhtml");
 
@@ -43,8 +48,6 @@ public class GameControls implements Serializable {
             OVERVIEW,
             GALAXIE,
             BUILDINGS,
-            RESEARCH,
-            FLEET,
             TRADE,
             ACCOUNT);
     

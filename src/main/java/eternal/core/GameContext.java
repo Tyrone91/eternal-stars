@@ -16,6 +16,10 @@ import eternal.game.control.PlanetHandler;
 import eternal.game.control.UniverseHandler;
 import eternal.game.environment.Universe;
 
+/**
+ * Holder class for gameplay relevant information like {@link BuildingTemplate templates}.
+ * Additionally the context holds some Beans that can be accessed by none managed objects.
+ */
 @Named
 @ApplicationScoped
 public class GameContext {

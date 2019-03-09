@@ -14,7 +14,9 @@ import eternal.session.InteractionHandler;
 import eternal.user.User;
 import eternal.user.UserRole;
 
-
+/**
+ * Some basic initializations for the working demo of the project.
+ */
 @ApplicationScoped
 public class DemoInit {
     
@@ -43,9 +45,10 @@ public class DemoInit {
         createIfNotExists("[SYS_ADMIN]", "admin", userRoleHandler.findRole(UserRole.ADMIN.getName()).orElse(UserRole.ADMIN));
         createIfNotExists("Test01", "123", userRoleHandler.findRole(UserRole.NORMAL_USER.getName()).orElse(UserRole.NORMAL_USER));
         
-        //insertRandomUser("DEMO_ACCOUNT_PW_123", 23);
+        //insertRandomUser("DEMO_ACCOUNT_PW_123", 7);
     }
     
+    @SuppressWarnings("unused")
     private void insertRandomUser(String name, int count) {
         for(int i = 0; i < count; ++i) {
             String userName = name + "_" + i;

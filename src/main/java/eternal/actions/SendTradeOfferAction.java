@@ -16,6 +16,10 @@ import eternal.requests.SendTradeOfferRequest;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Sends a trade offer to the requested user.
+ * TODO: not finished.
+ */
 @Named
 @SessionScoped
 public class SendTradeOfferAction extends AbstractAction<Boolean, SendTradeOfferRequest> implements Serializable {

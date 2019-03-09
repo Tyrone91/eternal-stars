@@ -6,6 +6,12 @@ import javax.persistence.Id;
 import eternal.core.GameContext;
 import eternal.user.User;
 
+/**
+ * A {@link GameAccount} only exists in the context of a normal user.
+ * The admin as an example would be user who is not suppose to play the game so he would not have a {@link GameAccount}.
+ * The most users will have a {@link GameAccount}.
+ * The {@link GameAccount} augments the normal user-account with the game relevant information like homeplanet and displayname.
+ */
 @Entity
 public class GameAccount {
     

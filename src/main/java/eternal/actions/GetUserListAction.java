@@ -10,6 +10,9 @@ import eternal.mangement.UserHandler;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Returns a list of all users.
+ */
 @Named
 @SessionScoped
 public class GetUserListAction extends AbstractAction<List<User>, Void> {

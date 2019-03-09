@@ -11,6 +11,12 @@ import eternal.core.GameLoop.Updatable;
 import eternal.game.Resources;
 import eternal.game.environment.Planet;
 
+/**
+ * An actual building on a planet.
+ * A building uses a template to receive data that is equal for each
+ * building. The only thing the building really needs is to know on which planet it is and which level it has.
+ * 
+ */
 @Entity
 public class Building implements Updatable {
     
@@ -67,6 +73,10 @@ public class Building implements Updatable {
         return this.owner;
     }
     
+    /**
+     * Just some math magic to increase the cost of an building over time.
+     * @return
+     */
     public Resources getCost() {
         double modifer = Math.pow(level + 1, 0.85);
         long metal = Math.round(template.getBuildingCost().getMetal().getAmount() * modifer);
@@ -83,10 +93,18 @@ public class Building implements Updatable {
         return true;
     }
     
+    /**
+     * Returns the resource gain of this building.
+     * @return
+     */
     public Resources getGainPerMinute() {
         return this.template.getEstimatedGainPerMinute(this);
     }
     
+    /**
+     * Returns the resource gain of the building if it would be upgraded to one higher level.
+     * @return
+     */
     public Resources getGainPerMinuteAfterUpgrade() {
         return this.template.getEstimatedGainPerMinute(this, level + 1);
     }

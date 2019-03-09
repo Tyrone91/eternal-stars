@@ -8,6 +8,11 @@ import eternal.core.GameLoop;
 import eternal.game.Resources;
 import eternal.util.Equals;
 
+/**
+ * Base template for building.
+ * The relvant calculation for resource gain its in here, like all
+ * stateless properties like name, description, cost and so on.
+ */
 public class BuildingTemplate {
     
     private final int id;
@@ -99,7 +104,7 @@ public class BuildingTemplate {
                 );
     }
     
-    private static final double MINUTE_IN_MS = 60 * 1000;
+    
     private static Resources perSecond(Game g, Building b, Resources base) {
         //double elapsedTime = g.getGameLoop().getElapsedTime();
         double acc = g.getGameLoop().getElapsedTimeAccumulated();
@@ -128,7 +133,7 @@ public class BuildingTemplate {
     
     public final static BuildingTemplate METAL_MINE = new BuildingTemplate(
             0,
-            "Metal Mine", "A mine used to collect minerals",
+            "Metal Mine", "A mine used to collect minerals.",
             of(250, 75, 120),
             (g, b) -> b.getOwner().getPlanetResources().add( perSecond(g, b, of(5, 0, 0) )),
             new Resources(60 * 5, 0, 0)
@@ -136,7 +141,7 @@ public class BuildingTemplate {
     
     public final static BuildingTemplate CRYSTAL_MINE = new BuildingTemplate(
             1,
-            "Crystal Mine", "A mine used to collect minerals",
+            "Crystal Mine", "Extracts rare Crystals from the deeper parts of the planet.",
             of(300, 250, 200),
             (g, b) -> b.getOwner().getPlanetResources().add( perSecond(g, b, of(0, 3, 0) )),
             new Resources( 0, 3 * 60, 0)
@@ -144,7 +149,7 @@ public class BuildingTemplate {
     
     public final static BuildingTemplate ENERGY_GENERATOR = new BuildingTemplate(
             2,
-            "Energy Generator", "A mine used to collect minerals",
+            "Energy Generator", "A wonder of moderne science. This generator can produce unlimited energy.",
             of(280, 250, 0),
             (g, b) -> b.getOwner().getPlanetResources().add( perSecond(g, b, of(0, 0, 4) )),
             new Resources(0,0, 4 * 60)
@@ -153,7 +158,7 @@ public class BuildingTemplate {
     public final static BuildingTemplate DEEP_MINE = new BuildingTemplate(
             3,
             0,
-            "Deep-Core Mine", "A mine used to collect minerals",
+            "Deep-Core Mine", "In the deeptest parts of the planet many rare resources are awaiting usm even the heat of the core can be used to generate power.",
             of(5000, 6500, 10000),
             (g, b) -> b.getOwner().getPlanetResources().add( perSecond(g, b, of(50, 40, 5) )),
             new Resources(50 * 60, 40 * 60, 5 * 60)

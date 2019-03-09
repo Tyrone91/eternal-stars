@@ -11,6 +11,9 @@ import eternal.requests.RequestResponse;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Allows the upgrade of a building.
+ */
 @Named
 @SessionScoped
 public class UpgradeBuildingAction extends AbstractAction<Boolean, Building> {

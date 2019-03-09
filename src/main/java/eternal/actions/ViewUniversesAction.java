@@ -11,6 +11,9 @@ import eternal.game.environment.Universe;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Returns a list of all universes.
+ */
 @Named
 @SessionScoped
 public class ViewUniversesAction extends AbstractAction<List<Universe>, Void> {

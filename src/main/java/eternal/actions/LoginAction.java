@@ -12,6 +12,9 @@ import eternal.session.SessionContext;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Allows the login to the application.
+ */
 @Named
 @SessionScoped
 public class LoginAction extends AbstractAction<User, LoginRequest> {

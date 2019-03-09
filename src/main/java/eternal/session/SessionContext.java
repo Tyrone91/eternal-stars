@@ -14,6 +14,9 @@ import eternal.persistence.GameAccountDataAccessObject;
 import eternal.user.AnonymousUser;
 import eternal.user.User;
 
+/**
+ * The session contexts holds information about the current user active user.
+ */
 @Named
 @SessionScoped
 public class SessionContext implements Serializable {

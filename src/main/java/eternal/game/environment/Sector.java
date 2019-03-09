@@ -22,6 +22,12 @@ import eternal.core.GameLoop.Updatable;
 import eternal.game.control.PlanetHandler;
 import eternal.util.Equals;
 
+/**
+ * A Sector represents a local system with a limited number of players.
+ * A Sector provides a better overview and creates a real space because Sectors a connected to only to two
+ * more {@link Sector}s. This can be used to calculate a pseudo distance between planets. From position to position in the same 
+ * system and from secotr to secotr in the universe.
+ */
 @Entity
 public class Sector implements Updatable {
     
@@ -88,6 +94,10 @@ public class Sector implements Updatable {
         this.planetIds = new TreeSet<>(this.planetIds);
     }
     
+    /**
+     * Searches for a free slot in this Sector.
+     * @return
+     */
     private int getFreeSlot() {
         Set<Integer> used = new HashSet<>();
         this.planetIds.stream()

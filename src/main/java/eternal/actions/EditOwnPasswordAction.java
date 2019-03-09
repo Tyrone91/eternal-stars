@@ -12,6 +12,9 @@ import eternal.requests.RequestResponse;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * This allows the user to change his own password.
+ */
 @Named
 @SessionScoped
 public class EditOwnPasswordAction extends AbstractAction<Boolean, EditPasswordRequest> implements Serializable {

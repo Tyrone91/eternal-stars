@@ -18,6 +18,9 @@ import eternal.core.GameContext;
 import eternal.core.GameLoop.Updatable;
 import eternal.game.control.PlanetHandler;
 
+/**
+ * A universe represents the global object there all players are in.
+ */
 @Entity
 public class Universe implements Updatable {
     

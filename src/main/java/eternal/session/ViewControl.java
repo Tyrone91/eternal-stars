@@ -13,6 +13,9 @@ import eternal.game.environment.Sector;
 import eternal.game.environment.Universe;
 import eternal.user.UserRight;
 
+/**
+ * Helper class to navigate inside the admin page.
+ */
 @Named
 @SessionScoped
 public class ViewControl implements Serializable {

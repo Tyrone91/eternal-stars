@@ -37,6 +37,13 @@ import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
 
+/**
+ * Main class for all interactions between a user and the application.
+ * All actions a user can do should go over this class.
+ * This class is the main reason that the {@link UserRight}-System works and no critical
+ * informations to unauthorized user. To keep this no direct call the handler Objects or DB should be make from
+ * JSF.
+ */
 @Named
 @SessionScoped
 public class InteractionHandler implements Serializable {
@@ -104,7 +111,7 @@ public class InteractionHandler implements Serializable {
             if(user.get().getGameAccount().isPresent()) {
                 return viewControl.pushPage("/game.xhtml");
             } else {
-                return viewControl.showAdminPage();
+                return viewControl.showAdminPage(); // if the user has no GameAccount there is not much sense to go the game. If the user has not the authorization to see the admin stuff he will see a mostly empty side.
             }
             
         } else {
@@ -118,7 +125,7 @@ public class InteractionHandler implements Serializable {
     
     public String logoutWithRedirect() {
         logout();
-        return "/login.xhtml";
+        return "/login.xhtml?faces-redirect=true";
     }
     
     public Optional<User> register(RegistrationRequest request) {
@@ -136,6 +143,11 @@ public class InteractionHandler implements Serializable {
         return user;
     }
     
+    /**
+     * Do a normal registration and then log the user in.
+     * @param request
+     * @return
+     */
     public String registerWithGameAccountAndForward(GameAccountRegistrationRequest request) {
         Optional<User> user = registerWithGameAccount(request);
         if(!user.isPresent()) {

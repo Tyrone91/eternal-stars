@@ -14,6 +14,10 @@ import eternal.core.GameContext;
 import eternal.game.environment.Planet;
 import eternal.persistence.PlanetDataAccessObject;
 
+/**
+ * Management class to abstract the DB and the programm logic.
+ * All Planet related stuff should go over this class.
+ */
 @Named
 @ApplicationScoped
 public class PlanetHandler {

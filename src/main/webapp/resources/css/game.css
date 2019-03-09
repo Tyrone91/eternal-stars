@@ -95,6 +95,10 @@ a {
 	margin-bottom: 0.5em;
 }
 
+.building-panel input[type="submit"] {
+	max-width: 6em;
+}
+
 .building-panel .building-title {
     font-size: 1.3em;
 }

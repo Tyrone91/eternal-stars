@@ -11,6 +11,9 @@ import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
 
+/**
+ * Returns a list of all roles.
+ */
 @Named
 @SessionScoped
 public class GetUserRolesListAction extends AbstractAction<List<UserRole>, Void> {

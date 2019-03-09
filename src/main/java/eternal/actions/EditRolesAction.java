@@ -15,6 +15,9 @@ import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
 
+/**
+ * Allows the modification of the of the rights of a given role.
+ */
 @Named
 @SessionScoped
 public class EditRolesAction extends AbstractAction<Boolean, EditUserRoleRequest> {

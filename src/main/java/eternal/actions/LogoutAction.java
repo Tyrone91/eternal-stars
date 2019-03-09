@@ -8,6 +8,9 @@ import eternal.session.SessionContext;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Allows the logout out of the application,
+ */
 @Named
 @SessionScoped
 public class LogoutAction extends AbstractAction<Void, Void>{

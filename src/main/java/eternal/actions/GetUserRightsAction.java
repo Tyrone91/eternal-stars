@@ -9,6 +9,9 @@ import javax.inject.Named;
 import eternal.user.User;
 import eternal.user.UserRight;
 
+/**
+ * Returns a list of all user rights.
+ */
 @Named
 @SessionScoped
 public class GetUserRightsAction extends AbstractAction<List<UserRight>, Void>{

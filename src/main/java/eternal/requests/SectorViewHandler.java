@@ -16,9 +16,11 @@ import eternal.game.control.UniverseHandler;
 import eternal.game.environment.Planet;
 import eternal.game.environment.Sector;
 import eternal.game.environment.Universe;
+import eternal.mangement.UserHandler;
 import eternal.persistence.GameAccountDataAccessObject;
 import eternal.persistence.UniverseDataAccessObject;
 import eternal.session.SessionContext;
+import eternal.user.User;
 
 @Named
 @SessionScoped
@@ -40,6 +42,9 @@ public class SectorViewHandler implements Serializable {
     
     @Inject
     private GameAccountDataAccessObject accountDAO;
+    
+    @Inject
+    private UserHandler userHandler;
     
     private GameAccount account;
     
@@ -145,6 +150,10 @@ public class SectorViewHandler implements Serializable {
         public void setIndex(int index) {
             this.index = index;
         }
+    }
+    
+    public User getUserOfPlanet(Planet p) {
+        return userHandler.find(p.getOwnerId()).get();
     }
 
 }

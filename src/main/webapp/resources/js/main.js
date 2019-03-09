@@ -1,19 +1,23 @@
-let RESOURCE_PULL_INVTERVALL_ID = -1;
+let RESOURCE_PULL = true;
 
 function pullResources() {
 	const button = document.getElementById("placeholder-resource-pull-button");
 	button.style = "display: none";
-	RESOURCE_PULL_INVTERVALL = setInterval( () => {
+
+	const request = () => {
 		button.click();
-	}, 500);
+		if(RESOURCE_PULL) {
+			setTimeout(request,500);
+		}
+	};
+
+	request();
 }
 
 function stopPullingResources() {
-	console.log("Hello World");
-	clearInterval(RESOURCE_PULL_INVTERVALL_ID);
+	RESOURCE_PULL = false;
 }
 
 window.addEventListener("load", event => {
 	pullResources();
-	console.log("JS loaded");
 });

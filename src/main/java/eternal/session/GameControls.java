@@ -30,14 +30,23 @@ public class GameControls implements Serializable {
     @Inject
     private PlanetHandler planetHandler;
     
+    public final static Control OVERVIEW = new Control("Overview", "game-overview.xhtml");
+    public final static Control GALAXIE = new Control("Galaxie", "game-sector-view.xhtml");
+    public final static Control BUILDINGS = new Control("Buildings", "game-building.xhtml");
+    public final static Control RESEARCH = new Control("Research", "game-research.xhtml");
+    public final static Control FLEET = new Control("Fleet", "game-fleet.xhtml");
+    public final static Control TRADE = new Control("Trade", "game-trade-offer.xhtml");
+    public final static Control ACCOUNT = new Control("Account", "game-edit-account.xhtml");
+
+    
     private static List<Control> ALL_CONTROLS = Arrays.asList(
-            new Control("Overview", "game-overview.xhtml"),
-            new Control("Galaxie", "game-sector-view.xhtml"),
-            new Control("Buildings", "game-building.xhtml"),
-            new Control("Research", "game-research.xhtml"),
-            new Control("Fleet", "game-fleet.xhtml"),
-            new Control("Account", "game-edit-account.xhtml")
-            );
+            OVERVIEW,
+            GALAXIE,
+            BUILDINGS,
+            RESEARCH,
+            FLEET,
+            TRADE,
+            ACCOUNT);
     
     private Control currentFocus;
     

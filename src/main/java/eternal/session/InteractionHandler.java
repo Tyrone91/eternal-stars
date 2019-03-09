@@ -32,6 +32,7 @@ import eternal.requests.EditUserRoleRequest;
 import eternal.requests.GameAccountRegistrationRequest;
 import eternal.requests.LoginRequest;
 import eternal.requests.RegistrationRequest;
+import eternal.requests.SendTradeOfferRequest;
 import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
@@ -50,6 +51,9 @@ public class InteractionHandler implements Serializable {
 
     @Inject
     private SessionContext sessionContext;
+    
+    @Inject
+    private LoginRequest loginRequest;
     
     @Inject
     private LoginAction loginAction;
@@ -132,6 +136,16 @@ public class InteractionHandler implements Serializable {
         return user;
     }
     
+    public String registerWithGameAccountAndForward(GameAccountRegistrationRequest request) {
+        Optional<User> user = registerWithGameAccount(request);
+        if(!user.isPresent()) {
+            return "";
+        }
+        loginRequest.setPassword(user.get().getPassword());
+        loginRequest.setUsername(user.get().getUsername());
+        return loginWithRedirect(loginRequest) + "?faces-redirect=true";
+    }
+    
     public List<User> allRegisteredUser() {
         return getUserListAction.performAction(sessionContext.getUser()).orElseGet(Collections::emptyList);
     }
@@ -174,5 +188,17 @@ public class InteractionHandler implements Serializable {
     
     public boolean upgradeBuilding(Building building) {
         return upgradeBuildingAction.performAction(sessionContext.getUser(), building).orElse(false);
+    }
+    
+    public boolean sendTradeOffer(SendTradeOfferRequest request) {
+        return false;
+        
+    }
+    
+    public boolean sendTradeOffer(Optional<SendTradeOfferRequest> request) {
+        if(!request.isPresent() ) {
+            return false;
+        }
+        return sendTradeOffer(request.get());
     }
 }

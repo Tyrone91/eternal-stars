@@ -8,7 +8,8 @@
       >
      
     <h:body >
-    	<h:panelGroup styleClass="building-list">
+    	<h:panelGroup styleClass="building-list" id="building-list">
+    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
     		<ui:repeat var="building" value="#{gameControls.buildings}">
     			<h:panelGroup styleClass="building-panel">
     				<h:outputText value="#{building.name}" styleClass="building-title"/>
@@ -20,11 +21,10 @@
     				<h:outputText value="#{building.description}" styleClass="building-description"/>
     				<h:panelGroup rendered="#{gameControls.buildingHasResourceGain(building)}">
     					<h:outputText value="Metal/min: #{building.gainPerMinute.metalAmount} -> #{building.gainPerMinuteAfterUpgrade.metalAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).metalAmount})" styleClass="resource resource-metal"/>
-    					<h:outputText value="Crystl/min: #{building.gainPerMinute.crystalAmount} -> #{building.gainPerMinuteAfterUpgrade.crystalAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).crystalAmount})" styleClass="resource resource-metal"/>
-    					<h:outputText value="Energy/min: #{building.gainPerMinute.energyAmount} -> #{building.gainPerMinuteAfterUpgrade.energyAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).energyAmount})" styleClass="resource resource-metal"/>
+    					<h:outputText value="Crystl/min: #{building.gainPerMinute.crystalAmount} -> #{building.gainPerMinuteAfterUpgrade.crystalAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).crystalAmount})" styleClass="resource resource-crystal"/>
+    					<h:outputText value="Energy/min: #{building.gainPerMinute.energyAmount} -> #{building.gainPerMinuteAfterUpgrade.energyAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).energyAmount})" styleClass="resource resource-energy"/>
     				</h:panelGroup>
-    				<h:commandButton value="Upgrade" action="#{interactionHandler.upgradeBuilding(building)}"> <f:ajax execute="@form" render="@form"/> </h:commandButton>
-    				<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    				<h:commandButton value="Upgrade" action="#{interactionHandler.upgradeBuilding(building)}"> <f:ajax execute="@form" render="building-list resource-view"/> </h:commandButton>
     			</h:panelGroup>
     		</ui:repeat>
     	</h:panelGroup>

@@ -15,7 +15,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
+import eternal.game.TradeOffer;
 import eternal.game.control.GameAccount;
 
 @Entity
@@ -35,6 +37,9 @@ public class User implements Serializable {
     @ManyToMany
     @JoinTable
     private Set<UserRole> roles;
+    
+    @OneToMany(mappedBy = "initiator")
+    private Set<TradeOffer> tradeOffers = new HashSet<>();
     
     private transient GameAccount gameAccount;
     

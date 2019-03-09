@@ -2,6 +2,10 @@
     margin: 0px;
     padding: 0px;
 }
+
+a {
+	color: #8181ff;
+}
 .game-body {
     display: flex;
     flex-direction: column;
@@ -24,7 +28,7 @@
 	padding-top: 0.5em;
     display: inline-flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     font-size: 1.4em;
 }
 .game-header .user-view a {
@@ -86,6 +90,11 @@
     padding: 0.5em;
     max-width: 400px;
 }
+
+.building-panel {
+	margin-bottom: 0.5em;
+}
+
 .building-panel .building-title {
     font-size: 1.3em;
 }
@@ -101,7 +110,7 @@
     color: grey;
 }
 .resource.resource-crystal {
-    color: blue;
+    color: #8181ff;
 }
 .resource.resource-energy {
     color: yellow;
@@ -206,6 +215,16 @@
     border: 2px solid darkgoldenrod;
 }
 
+.user-resource-header {
+	display: flex:
+	flex-direction: coulmn;
+}
+
+.user-resource-header .resource {
+	font-size: 1.4em;
+	padding: 0.5em 0em;
+	margin-right: 1.0em;
+}
 
 
 

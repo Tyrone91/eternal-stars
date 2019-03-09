@@ -3,6 +3,10 @@
 	padding: 0px;
 }
 
+a {
+	color: #8181ff;
+}
+
 form {
 	padding: 0.5em;
 }

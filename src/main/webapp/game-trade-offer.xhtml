@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+     
+    <h:body >
+    <h:panelGrid styleClass="user-account-edit">
+    	<h:panelGroup styleClass="custom-form" id="trade-offer-form">
+    	
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Trade with" for="input_trade_partner"/>
+    			<h:inputText value="#{tradeOfferHandler.partnerUsername}" id="input_trade_partner" />	
+    		</h:panelGroup>    		
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Offer metal" for="input_trade_offer_metal"/>
+    			<h:inputText value="#{tradeOfferHandler.metalOffer}" id="input_trade_offer_metal" />	
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Offer crystal" for="input_trade_offer_crystal"/>
+    			<h:inputText value="#{tradeOfferHandler.crystalOffer}" id="input_trade_offer_crystal" />	
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Offer energy" for="input_trade_offer_energy"/>
+    			<h:inputText value="#{tradeOfferHandler.energyOffer}" id="input_trade_offer_energy" />	
+    		</h:panelGroup>
+    		
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Demand metal" for="input_trade_demand_metal"/>
+    			<h:inputText value="#{tradeOfferHandler.metalDemand}" id="input_trade_demand_metal" />	
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Demand crystal" for="input_trade_demand_crystal"/>
+    			<h:inputText value="#{tradeOfferHandler.crystalDemand}" id="input_trade_demand_crystal" />	
+    		</h:panelGroup>
+    		
+    		<h:panelGroup styleClass="form-group">
+    			<h:outputLabel value="Demand energy" for="input_trade_demand_energy"/>
+    			<h:inputText value="#{tradeOfferHandler.energyDemand}" id="input_trade_demand_energy" />	
+    		</h:panelGroup>
+    		
+    		
+    		<h:panelGroup styleClass="form-grpup">
+    			<h:outputLabel value="Message" for="input_trade_message"/>
+    			<h:inputTextarea value="#{tradeOfferHandler.message}" id="input_trade_message"/>
+    		</h:panelGroup>
+    		
+    		
+    		<h:commandButton value="OK" action="#{interactionHandler.sendTradeOffer(tradeOfferHandler.createOffer())}">
+    			<f:ajax execute="@form" render="trade-offer-form resource-view"/>
+    		</h:commandButton>
+    		
+    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    		
+    	</h:panelGroup>
+    </h:panelGrid>
+    </h:body>
+</html>

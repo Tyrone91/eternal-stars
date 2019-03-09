@@ -13,6 +13,7 @@ public enum UserRight {
     BUILDING("build"),
     ATTACK("attack"),
     CHAT("chat"),
+    TRADE("trade"),
     
     USER_MANAGMENT_VIEW_ALL_RIGHTS("view-rights"),
     

@@ -38,6 +38,10 @@ public class Building implements Updatable {
         this.template = context.findBuildingTemplate(templateId).get();
     }
     
+    public int getTemplateId() {
+        return this.templateId;
+    }
+    
     public int getLevel() {
         return level;
     }

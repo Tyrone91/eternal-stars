@@ -16,6 +16,8 @@
       <class>eternal.game.Resource</class>
       <class>eternal.game.buildable.Building</class>
       
+      <class>eternal.game.TradeOffer</class>
+      
       <properties>
 	        <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 	        

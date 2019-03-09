@@ -30,7 +30,9 @@
 	    			
 	    			<h:column>
 		    			<f:facet name="header">Action</f:facet>
-		    			<h:commandButton value="Trade"></h:commandButton>
+		    			<h:commandButton value="Trade" action="#{tradeOfferHandler.tradeWith(sectorViewHandler.getUserOfPlanet(planet))}">
+		    				<f:ajax execute="@form" render="main-content"/>
+		    			</h:commandButton>
 	    			</h:column>
     	
     			</h:dataTable>

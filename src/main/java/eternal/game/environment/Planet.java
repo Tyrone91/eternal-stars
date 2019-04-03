@@ -32,7 +32,7 @@ public class Planet implements Updatable {
     private String gameAccountId;
     
     @JoinColumn
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Resources planetResources = new Resources(0, 0, 0);
     
     private String planetName;

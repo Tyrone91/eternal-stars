@@ -1,4 +1,4 @@
-package eternal.persistence;
+package eternal.persistence.jpa;
 
 import java.util.Optional;
 
@@ -10,12 +10,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import eternal.game.environment.Planet;
+import eternal.game.control.GameAccount;
+import eternal.persistence.GameAccountDataAccessObject;
+import eternal.persistence.PersistenceUnitNames;
 import eternal.util.ExceptionHandler;
 
 @Named 
 @ApplicationScoped
-public class JPAPlanetDataAccessObject implements PlanetDataAccessObject {
+public class JPAGameAccountDataAccessObject implements GameAccountDataAccessObject {
     
     private EntityManager entityManager;
     
@@ -33,39 +35,10 @@ public class JPAPlanetDataAccessObject implements PlanetDataAccessObject {
     }
 
     @Override
-    public synchronized boolean storePlanet(Planet planet) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(planet);
-            entityManager.getTransaction().commit();
-            entityManager.clear();
-            return true;
-        } catch(Exception e) {
-            
-            exceptionHandler.handleException(e);
-            return false;
-        }
-    }
-
-    @Override
-    public synchronized boolean updatePlanet(Planet planet) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.merge(planet);
-            entityManager.getTransaction().commit();
-            entityManager.clear();
-            return true;
-        } catch(Exception e) {
-            exceptionHandler.handleException(e);
-            return false;
-        }
-    }
-
-    @Override
-    public synchronized Optional<Planet> findPlanet(int id) {
+    public synchronized Optional<GameAccount> findAccount(String user) {
         try {
             entityManager.clear();
-            return Optional.ofNullable(entityManager.find(Planet.class, id));
+            return Optional.ofNullable(entityManager.find(GameAccount.class, user));
         } catch(Exception e) {
             exceptionHandler.handleException(e);
             return Optional.empty();
@@ -73,9 +46,37 @@ public class JPAPlanetDataAccessObject implements PlanetDataAccessObject {
     }
 
     @Override
-    public boolean deletePlanet(int id) {
+    public synchronized boolean storeAccount(GameAccount account) {
         try {
-            Planet tmp = entityManager.find(Planet.class, id);
+            entityManager.getTransaction().begin();
+            entityManager.persist(account);
+            entityManager.getTransaction().commit();
+            entityManager.clear();
+            return true;
+        } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+
+    @Override
+    public synchronized boolean updateAccount(GameAccount account) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(account);
+            entityManager.getTransaction().commit();
+            entityManager.clear();
+            return true;
+        } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+
+    @Override
+    public synchronized boolean deleteAccount(String account) {
+        try {
+            GameAccount tmp = entityManager.find(GameAccount.class, account);
             if(tmp == null) {
                 return false;
             }

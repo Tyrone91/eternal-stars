@@ -42,6 +42,7 @@ public class GameControls implements Serializable {
     public final static Control BUILDINGS = new Control("Buildings", "game-building.xhtml");
     public final static Control TRADE = new Control("Trade", "game-trade-offer.xhtml");
     public final static Control ACCOUNT = new Control("Account", "game-edit-account.xhtml");
+    public final static Control TRADE_OFFERS = new Control("Trade Requests", "game-trade-offer-overview.xhtml");
 
     
     private static List<Control> ALL_CONTROLS = Arrays.asList(
@@ -49,7 +50,8 @@ public class GameControls implements Serializable {
             GALAXIE,
             BUILDINGS,
             TRADE,
-            ACCOUNT);
+            ACCOUNT,
+            TRADE_OFFERS);
     
     private Control currentFocus;
     

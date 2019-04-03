@@ -1,4 +1,4 @@
-package eternal.persistence;
+package eternal.persistence.jpa;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import eternal.persistence.PersistenceUnitNames;
+import eternal.persistence.UserRoleAccessObject;
 import eternal.user.UserRole;
 import eternal.util.ExceptionHandler;
 

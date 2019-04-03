@@ -17,7 +17,14 @@ public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
     
     public static UserRole ADMIN = new UserRole("ADMIN", "Has access to everything.", UserRight.values());
-    public static UserRole NORMAL_USER = new UserRole("NORMAL", "Normal user without privilege", UserRight.LOGIN, UserRight.ATTACK, UserRight.BUILDING, UserRight.EDIT_OWN_ACCOUNT);
+    public static UserRole NORMAL_USER = new UserRole("NORMAL", "Normal user without privilege",
+            UserRight.LOGIN,
+            UserRight.ATTACK,
+            UserRight.BUILDING,
+            UserRight.CHAT,
+            UserRight.TRADE,
+            UserRight.EDIT_OWN_ACCOUNT,
+            UserRight.DELETE_OWN_ACCOUNT);
     public static UserRole ANONYMOUS = new UserRole("ANONYMOUS", "Unknown user to the system", UserRight.LOGIN, UserRight.REGISTER);
     
     @Enumerated(EnumType.STRING)

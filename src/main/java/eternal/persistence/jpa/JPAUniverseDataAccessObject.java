@@ -1,4 +1,4 @@
-package eternal.persistence;
+package eternal.persistence.jpa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +15,8 @@ import javax.persistence.Persistence;
 
 import eternal.game.environment.Sector;
 import eternal.game.environment.Universe;
+import eternal.persistence.PersistenceUnitNames;
+import eternal.persistence.UniverseDataAccessObject;
 import eternal.util.ExceptionHandler;
 
 @Named

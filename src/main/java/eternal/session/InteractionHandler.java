@@ -20,6 +20,7 @@ import eternal.actions.GetUserRolesListAction;
 import eternal.actions.LoginAction;
 import eternal.actions.LogoutAction;
 import eternal.actions.RegistrationAction;
+import eternal.actions.SendTradeOfferAction;
 import eternal.actions.UpgradeBuildingAction;
 import eternal.actions.ViewUniversesAction;
 import eternal.game.buildable.Building;
@@ -100,6 +101,9 @@ public class InteractionHandler implements Serializable {
     
     @Inject
     private UpgradeBuildingAction upgradeBuildingAction;
+    
+    @Inject
+    private SendTradeOfferAction sendTradeOfferAction;
     
     public Optional<User> login(LoginRequest request) {
         return loginAction.performAction(sessionContext.getUser(), request);
@@ -203,8 +207,7 @@ public class InteractionHandler implements Serializable {
     }
     
     public boolean sendTradeOffer(SendTradeOfferRequest request) {
-        return false;
-        
+        return sendTradeOfferAction.performAction(sessionContext.getUser(), request).orElse(false);
     }
     
     public boolean sendTradeOffer(Optional<SendTradeOfferRequest> request) {

@@ -26,7 +26,7 @@ import eternal.util.Equals;
  * A Sector represents a local system with a limited number of players.
  * A Sector provides a better overview and creates a real space because Sectors a connected to only to two
  * more {@link Sector}s. This can be used to calculate a pseudo distance between planets. From position to position in the same 
- * system and from secotr to secotr in the universe.
+ * system and from sector to sector in the universe.
  */
 @Entity
 public class Sector implements Updatable {

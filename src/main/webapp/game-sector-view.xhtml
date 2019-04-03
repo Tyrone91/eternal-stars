@@ -30,7 +30,7 @@
 	    			
 	    			<h:column>
 		    			<f:facet name="header">Action</f:facet>
-		    			<h:commandButton value="Trade" action="#{tradeOfferHandler.tradeWith(sectorViewHandler.getUserOfPlanet(planet))}">
+		    			<h:commandButton value="Trade" action="#{tradeOfferBuilder.tradeWith(sectorViewHandler.getUserOfPlanet(planet))}">
 		    				<f:ajax execute="@form" render="main-content"/>
 		    			</h:commandButton>
 	    			</h:column>
@@ -47,7 +47,7 @@
 	    		<h:panelGroup styleClass="sector-view-direct-selection">
 		    		<ui:repeat var="tuple" value="#{sectorViewHandler.sortedSecotrs}">
 		    			
-	    				<h:commandLink value="#{tuple.index+1}" action="#{sectorViewHandler.selectIndex(tuple.index)}" rendered="#{not sectorViewHandler.isSelected(tuple.index)}">
+	    				<h:commandLink value="#{tuple.index+1}" action="#{sectorViewHandler.selectIndex(tuple.index)}" rendered="#{sectorViewHandler.isNotSelected(tuple.index)}">
 	    					<f:ajax render="sector-view" execute="@this"/>	
 	    				</h:commandLink>
 	    				

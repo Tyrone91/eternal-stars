@@ -1,4 +1,4 @@
-package eternal.persistence;
+package eternal.persistence.jpa;
 
 import java.util.Optional;
 
@@ -10,17 +10,19 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import eternal.game.control.GameAccount;
+import eternal.game.TradeOffer;
+import eternal.persistence.PersistenceUnitNames;
+import eternal.persistence.TradeOfferAccessObject;
 import eternal.util.ExceptionHandler;
 
-@Named 
+@Named
 @ApplicationScoped
-public class JPAGameAccountDataAccessObject implements GameAccountDataAccessObject {
-    
-    private EntityManager entityManager;
+public class JPATradeOfferAccessObject implements TradeOfferAccessObject {
     
     @Inject
     private ExceptionHandler exceptionHandler;
+    
+    private EntityManager entityManager;
     
     @PostConstruct
     public void init() {
@@ -33,10 +35,38 @@ public class JPAGameAccountDataAccessObject implements GameAccountDataAccessObje
     }
 
     @Override
-    public synchronized Optional<GameAccount> findAccount(String user) {
+    public synchronized boolean storeOffer(TradeOffer offer) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(offer);
+            entityManager.getTransaction().commit();
+            entityManager.clear();
+            return true;
+        } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+
+    @Override
+    public synchronized boolean updateOffer(TradeOffer offer) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(offer);
+            entityManager.getTransaction().commit();
+            entityManager.clear();
+            return true;
+        } catch(Exception e) {
+            exceptionHandler.handleException(e);
+            return false;
+        }
+    }
+
+    @Override
+    public synchronized Optional<TradeOffer> findOffer(String id) {
         try {
             entityManager.clear();
-            return Optional.ofNullable(entityManager.find(GameAccount.class, user));
+            return Optional.ofNullable(entityManager.find(TradeOffer.class, id));
         } catch(Exception e) {
             exceptionHandler.handleException(e);
             return Optional.empty();
@@ -44,10 +74,10 @@ public class JPAGameAccountDataAccessObject implements GameAccountDataAccessObje
     }
 
     @Override
-    public synchronized boolean storeAccount(GameAccount account) {
+    public boolean deleteOffer(TradeOffer offer) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(account);
+            entityManager.remove(offer);
             entityManager.getTransaction().commit();
             entityManager.clear();
             return true;
@@ -58,32 +88,21 @@ public class JPAGameAccountDataAccessObject implements GameAccountDataAccessObje
     }
 
     @Override
-    public synchronized boolean updateAccount(GameAccount account) {
+    public boolean storeOfferAndUpdateUser(TradeOffer offer) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(account);
+            entityManager.persist(offer);
+            entityManager.merge(offer.getInitiator());
+            entityManager.merge(offer.getReceiver());
             entityManager.getTransaction().commit();
             entityManager.clear();
             return true;
         } catch(Exception e) {
-            exceptionHandler.handleException(e);
-            return false;
-        }
-    }
-
-    @Override
-    public synchronized boolean deleteAccount(String account) {
-        try {
-            GameAccount tmp = entityManager.find(GameAccount.class, account);
-            if(tmp == null) {
-                return false;
+            try {                
+                entityManager.getTransaction().rollback();
+            } catch(Exception ex) {
+                exceptionHandler.handleException(ex);
             }
-            entityManager.getTransaction().begin();
-            entityManager.remove(tmp);
-            entityManager.getTransaction().commit();
-            entityManager.clear();
-            return true;
-        } catch(Exception e) {
             exceptionHandler.handleException(e);
             return false;
         }

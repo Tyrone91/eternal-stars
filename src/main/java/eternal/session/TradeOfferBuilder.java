@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.game.Resources;
-import eternal.game.TradeOffer;
 import eternal.mangement.UserHandler;
 import eternal.persistence.GameAccountDataAccessObject;
 import eternal.requests.RequestResponse;
@@ -17,7 +16,7 @@ import eternal.user.User;
 
 @Named
 @RequestScoped
-public class TradeOfferHandler implements Serializable {
+public class TradeOfferBuilder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -120,7 +119,7 @@ public class TradeOfferHandler implements Serializable {
         final Optional<User> target = userHandler.find(partnerUsername);
         if(!target.isPresent()) {
             requestResponse.setMessage("Trade partner not found");
-            Optional.empty();
+            return Optional.empty();
         }
         
         if(!accountDAO.findAccount(target.get().getUsername()).isPresent()) {
@@ -140,15 +139,7 @@ public class TradeOfferHandler implements Serializable {
         
         return Optional.of(tradeOffer);
     }
-    
-    public void acceptTradeOffer(TradeOffer offer) {
         
-    }
-    
-    public void declineTradeOffer(TradeOffer offer) {
-        
-    }
-    
     public void tradeWith(User user) {
         tradeOffer.setTarget(user);
         this.partnerUsername = user.getUsername();

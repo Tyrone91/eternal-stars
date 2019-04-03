@@ -68,8 +68,8 @@ public class UserHandler implements Serializable {
         return Optional.empty();
     }
     
-    public void updateUser(User u) {
-        userDAO.updateUser(u);
+    public boolean updateUser(User u) {
+        return userDAO.updateUser(u);
     }
     
     public boolean deleteUser(User u) {

@@ -119,6 +119,10 @@ public class SectorViewHandler implements Serializable {
         return selectedIndex == index;
     }
     
+    public boolean isNotSelected(int index) {
+        return !isSelected(index);
+    }
+    
     public List<Planet> getPlanetsOfSelectedSector() {
         List<Planet> planets = getSelectedSector().getSector().getPlanets();
         planets.sort( (p1,p2) -> Integer.compare(p1.getPosition(), p2.getPosition()) );

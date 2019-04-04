@@ -8,26 +8,46 @@
       >
      
     <h:body >
-    
-    	<h:panelGroup>
-    		<ui:repeat var="send" value="#{tradeOfferControl.sendTradeOffers}">
-    			<div>
-    				<span>
-    					<h:outputText value="#{send.receiver.username}"/>
-    				</span>
-    			</div>
-    		</ui:repeat>
-    	</h:panelGroup>
-    	
-    	<h:panelGroup>
-    		<ui:repeat var="received" value="#{tradeOfferControl.receivedTradeOffers}">
-    			<div>
-    				<span>
-    					<h:outputText value="#{received.initiator.username}"/>
-    				</span>
-    			</div>
-    		</ui:repeat>
-    	</h:panelGroup>
-    		
+    	<div>
+	    	<h:panelGroup>
+	    		<span>Send Offers</span>
+	    		<ui:repeat var="offer" value="#{interactionHandler.trade.sendTradeOffers}">
+	    			<div>
+	    				<span>
+	    					<h:outputText value="#{tradeOfferHandler.getReceiverName(offer)}"/>
+	    				</span>
+	    				<span>
+	    					<span>
+	    						<h:outputText value="#{offer.receiverGets.metal}"/>
+	    					</span>
+	    					<span>
+	    						<h:outputText value="#{offer.receiverGets.crystal}"/>
+	    					</span>
+	    					<span>
+	    						<h:outputText value="#{offer.receiverGets.energy}"/>
+	    					</span>
+	    				</span>
+	    				<span>
+	    					<h:commandButton value="Decline" action="#{interactionHandler.trade.declineTradeOffer(offer)}"/>
+	    				</span>
+	    			</div>
+	    		</ui:repeat>
+	    	</h:panelGroup>
+	    	
+	    	<h:panelGroup>
+	    		<span>Received Offers</span>
+	    		<ui:repeat var="offer" value="#{interactionHandler.trade.receivedTradeOffers}">
+	    			<div>
+	    				<span>
+	    					<h:outputText value="#{tradeOfferHandler.getInitiatorName(offer)}"/>
+	    				</span>
+	    				<span>
+	    					<h:commandButton value="Accept" action="#{interactionHandler.trade.acceptTradeOffer(offer)}"/>
+	    					<h:commandButton value="Decline" action="#{interactionHandler.trade.declineTradeOffer(offer)}"/>
+	    				</span>
+	    			</div>
+	    		</ui:repeat>
+	    	</h:panelGroup>
+    	</div>
     </h:body>
 </html>

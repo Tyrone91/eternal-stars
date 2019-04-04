@@ -4,7 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import eternal.game.Resources;
-import eternal.user.User;
+import eternal.game.control.GameAccount;
 
 @Named
 @RequestScoped
@@ -13,7 +13,7 @@ public class SendTradeOfferRequest {
     private String message;
     private Resources offerGives;
     private Resources offerWansts;
-    private User target;
+    private GameAccount target;
     
     public String getMessage() {
         return message;
@@ -39,11 +39,11 @@ public class SendTradeOfferRequest {
         this.offerWansts = offerWansts;
     }
     
-    public User getTarget() {
+    public GameAccount getTarget() {
         return target;
     }
     
-    public void setTarget(User target) {
+    public void setTarget(GameAccount target) {
         this.target = target;
     }
     

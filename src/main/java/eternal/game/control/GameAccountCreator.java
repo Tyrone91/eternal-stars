@@ -51,7 +51,7 @@ public class GameAccountCreator {
             account.setDisplayName(displayName);
             account.setOwnerId(user);
             
-            planet.setOwner(account.getId());
+            planet.setOwner(account.getOwnerId());
             planet.onload(game.getContext());
             planetDAO.storePlanet(planet); //Get id
             

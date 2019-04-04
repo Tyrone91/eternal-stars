@@ -36,7 +36,7 @@ public class GameAccountRemover {
         
         //TODO: remove future fleet stuff too.
         
-        return gameAccoutnDAO.deleteAccount(account.getId());
+        return gameAccoutnDAO.deleteAccount(account.getOwnerId());
     }
     
     public boolean removeAccount(String gameAccountId ) {

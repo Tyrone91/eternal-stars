@@ -1,21 +1,17 @@
-package eternal.actions;
-
-import java.util.List;
+package eternal.actions.mangement;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.mangement.UserHandler;
 import eternal.user.User;
 import eternal.user.UserRight;
 
-/**
- * Returns a list of all users.
- */
 @Named
 @SessionScoped
-public class GetUserListAction extends AbstractAction<List<User>, Void> {
+public class DeleteAnyUserAction extends AbstractAction<Boolean, User> {
 
     private static final long serialVersionUID = 1L;
     
@@ -24,12 +20,13 @@ public class GetUserListAction extends AbstractAction<List<User>, Void> {
 
     @Override
     public UserRight getNeededRight() {
-        return UserRight.USER_MANAGMENT_VIEW_ALL_USERS;
+        return UserRight.USER_MANAGMENT_DELETE_USER;
     }
 
     @Override
-    protected List<User> action(User user, Void... args) {
-        return userHandler.getAllRegisteredUsersAsList();
+    protected Boolean action(User initiator, User... args) {
+        final User target = args[0];
+        return userHandler.deleteUser(target.getUsername());
     }
     
 }

@@ -2,14 +2,17 @@ package eternal.game;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-import eternal.user.User;
+import eternal.game.control.GameAccount;
+import eternal.persistence.data.ResourceTO;
 
 @Entity
 public class TradeOffer implements Serializable {
@@ -21,49 +24,53 @@ public class TradeOffer implements Serializable {
     private int id;
     
     @ManyToOne
-    private User initiator;
+    private GameAccount initiator;
     
     @ManyToOne
-    private User receiver;
+    private GameAccount receiver;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Resources receiverGets;
+    @Embedded
+    @AttributeOverrides( value = {
+            @AttributeOverride( name = "crystal", column= @Column(name = "get_crystal")),
+            @AttributeOverride( name = "metal", column= @Column(name = "get_metal")),
+            @AttributeOverride( name = "energy", column= @Column(name = "get_energy"))
+    })
+    private ResourceTO receiverGets;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private Resources receiverGives;
+    @Embedded
+    private ResourceTO receiverGives;
     
     private String message;
     
-    
-    public User getInitiator() {
+    public GameAccount getInitiator() {
         return initiator;
     }
 
-    public void setInitiator(User initiator) {
+    public void setInitiator(GameAccount initiator) {
         this.initiator = initiator;
     }
 
-    public User getReceiver() {
+    public GameAccount getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(User receiver) {
+    public void setReceiver(GameAccount receiver) {
         this.receiver = receiver;
     }
 
-    public Resources getReceiverGets() {
+    public ResourceTO getReceiverGets() {
         return receiverGets;
     }
 
-    public void setReceiverGets(Resources receiverGets) {
+    public void setReceiverGets(ResourceTO receiverGets) {
         this.receiverGets = receiverGets;
     }
 
-    public Resources getReceiverGives() {
+    public ResourceTO getReceiverGives() {
         return receiverGives;
     }
 
-    public void setReceiverGives(Resources receiverGives) {
+    public void setReceiverGives(ResourceTO receiverGives) {
         this.receiverGives = receiverGives;
     }
 

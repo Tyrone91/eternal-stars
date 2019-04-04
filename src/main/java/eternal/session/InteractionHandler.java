@@ -9,20 +9,20 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import eternal.actions.DeleteAnyUserAction;
-import eternal.actions.EditOwnEmailAction;
-import eternal.actions.EditOwnNicknameAction;
-import eternal.actions.EditOwnPasswordAction;
-import eternal.actions.EditRolesAction;
-import eternal.actions.GetUserListAction;
-import eternal.actions.GetUserRightsAction;
-import eternal.actions.GetUserRolesListAction;
-import eternal.actions.LoginAction;
-import eternal.actions.LogoutAction;
-import eternal.actions.RegistrationAction;
-import eternal.actions.SendTradeOfferAction;
-import eternal.actions.UpgradeBuildingAction;
-import eternal.actions.ViewUniversesAction;
+import eternal.actions.account.EditOwnEmailAction;
+import eternal.actions.account.EditOwnNicknameAction;
+import eternal.actions.account.EditOwnPasswordAction;
+import eternal.actions.game.UpgradeBuildingAction;
+import eternal.actions.game.ViewUniversesAction;
+import eternal.actions.game.trade.SendTradeOfferAction;
+import eternal.actions.mangement.DeleteAnyUserAction;
+import eternal.actions.mangement.EditRolesAction;
+import eternal.actions.mangement.GetUserListAction;
+import eternal.actions.mangement.GetUserRightsAction;
+import eternal.actions.mangement.GetUserRolesListAction;
+import eternal.actions.user.LoginAction;
+import eternal.actions.user.LogoutAction;
+import eternal.actions.user.RegistrationAction;
 import eternal.game.buildable.Building;
 import eternal.game.control.GameAccountCreator;
 import eternal.game.environment.Universe;
@@ -34,6 +34,7 @@ import eternal.requests.GameAccountRegistrationRequest;
 import eternal.requests.LoginRequest;
 import eternal.requests.RegistrationRequest;
 import eternal.requests.SendTradeOfferRequest;
+import eternal.session.interaction.TradeInteractionHandler;
 import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
@@ -104,6 +105,9 @@ public class InteractionHandler implements Serializable {
     
     @Inject
     private SendTradeOfferAction sendTradeOfferAction;
+    
+    @Inject
+    private TradeInteractionHandler tradeInteractionHandler;
     
     public Optional<User> login(LoginRequest request) {
         return loginAction.performAction(sessionContext.getUser(), request);
@@ -215,5 +219,9 @@ public class InteractionHandler implements Serializable {
             return false;
         }
         return sendTradeOffer(request.get());
+    }
+    
+    public TradeInteractionHandler getTrade() {
+        return tradeInteractionHandler;
     }
 }

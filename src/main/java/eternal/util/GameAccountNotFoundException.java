@@ -2,7 +2,7 @@ package eternal.util;
 
 import eternal.user.User;
 
-public class GameAccountNotFoundException extends RuntimeException {
+public class GameAccountNotFoundException extends Exception {
     
     private static final long serialVersionUID = 1L;
     

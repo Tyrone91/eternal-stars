@@ -77,7 +77,8 @@ public class JPATradeOfferAccessObject implements TradeOfferAccessObject {
     public boolean deleteOffer(TradeOffer offer) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.remove(offer);
+            final TradeOffer toDelete = entityManager.merge(offer);
+            entityManager.remove(toDelete);
             entityManager.getTransaction().commit();
             entityManager.clear();
             return true;

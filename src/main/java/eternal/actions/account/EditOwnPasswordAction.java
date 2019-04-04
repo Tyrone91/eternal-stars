@@ -1,4 +1,4 @@
-package eternal.actions;
+package eternal.actions.account;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.mangement.UserHandler;
 import eternal.requests.EditPasswordRequest;
 import eternal.requests.RequestResponse;

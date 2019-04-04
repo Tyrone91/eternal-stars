@@ -7,9 +7,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 import eternal.core.Game;
 import eternal.core.GameContext;
@@ -17,6 +18,7 @@ import eternal.core.GameLoop.Updatable;
 import eternal.game.Resources;
 import eternal.game.buildable.Building;
 import eternal.game.buildable.BuildingTemplate;
+import eternal.persistence.data.ResourceTO;
 
 /**
  * The virtual physical home of an player in the universe.
@@ -25,19 +27,19 @@ import eternal.game.buildable.BuildingTemplate;
 @Entity
 public class Planet implements Updatable {
     
+    private transient Resources planetResources = new Resources(0, 0, 0);
+    
     @Id
     @GeneratedValue
     private int planetId;
     
     private String gameAccountId;
     
-    @JoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
-    private Resources planetResources = new Resources(0, 0, 0);
-    
     private String planetName;
     
     private int planetPosition;
+    
+    private ResourceTO resources = new ResourceTO();
     
     private int sectorId;
     
@@ -62,6 +64,17 @@ public class Planet implements Updatable {
             buildings.stream().forEach(b -> b.onload(context));
         }
         context.getGame().getGameLoop().addObject(this);
+    }
+    
+    @PreUpdate
+    @PrePersist
+    private void beforeSave() {
+        this.resources.updateFrom(planetResources);
+    }
+    
+    @PostLoad
+    private void afterLoad() {
+        this.planetResources = new Resources(this.resources.getMetal(), this.resources.getCrystal(), this.resources.getEnergy());
     }
     
     public void onremove(GameContext context) {
@@ -122,6 +135,7 @@ public class Planet implements Updatable {
     }
     
     public Resources getGainPerMinute() {
+        
         return this.buildings.stream().map(Building::getGainPerMinute).reduce( new Resources(), (ores, nres) -> {
             ores.add(nres);
             return ores;

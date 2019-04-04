@@ -1,4 +1,4 @@
-package eternal.actions;
+package eternal.actions.mangement;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.mangement.UserRoleHandler;
 import eternal.requests.EditUserRoleRequest;
 import eternal.requests.EditUserRoleRequest.RightWrapper;

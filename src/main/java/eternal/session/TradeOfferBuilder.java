@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import eternal.game.Resources;
+import eternal.game.control.GameAccount;
 import eternal.mangement.UserHandler;
 import eternal.persistence.GameAccountDataAccessObject;
 import eternal.requests.RequestResponse;
@@ -122,7 +123,8 @@ public class TradeOfferBuilder implements Serializable {
             return Optional.empty();
         }
         
-        if(!accountDAO.findAccount(target.get().getUsername()).isPresent()) {
+        final Optional<GameAccount> account = accountDAO.findAccount(target.get().getUsername()); 
+        if(!account.isPresent()) {
             requestResponse.setMessage("The requested partner can not trade");
             return Optional.empty();
         }
@@ -135,13 +137,12 @@ public class TradeOfferBuilder implements Serializable {
         tradeOffer.setOfferGives(offer);
         tradeOffer.setOfferWansts(demand);        
         
-        tradeOffer.setTarget(target.get());
+        tradeOffer.setTarget(account.get());
         
         return Optional.of(tradeOffer);
     }
         
     public void tradeWith(User user) {
-        tradeOffer.setTarget(user);
         this.partnerUsername = user.getUsername();
         gameControls.setCurrentFocus(GameControls.TRADE);
     }

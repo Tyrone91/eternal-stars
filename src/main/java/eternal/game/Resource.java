@@ -1,66 +1,56 @@
 package eternal.game;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-@Entity
 public class Resource {
     
-    @Id
-    @GeneratedValue
-    private int id;
-    
-    private String type;
     private long amount;
     
-    public Resource() {}
-    
-    public Resource(String type, long amount) {
-        this.type = type;
-        this.amount = amount;
+    protected Resource(long initial) {
+        amount = initial;
     }
     
-    public Resource(Resource source) {
-        this(source.getType(), source.getAmount());
-    }
-    
-
-    public String getType() {
-        return type;
-    }
-
-
-    public long getAmount() {
-        return amount;
-    }
-    
-    protected Resource amount(long inc) {
-        if(inc > 0) {
-            if(Long.MAX_VALUE - inc < this.amount) {
+    protected void add(long val) {
+        if(val > 0) {
+            if(Long.MAX_VALUE - val < this.amount) {
                 this.amount = Long.MAX_VALUE;
             } else {                    
-                this.amount += inc;
+                this.amount += val;
             }
         } else {
-            this.amount += inc;
+            this.amount += val;
         }
         
         if(amount < 0) {
             amount = 0;
         }
-        return this;
     }
     
-    protected Resource amount(Resource inc) {
-        return amount(inc, false);
-     }
-    
-    protected Resource amount(Resource inc, boolean sub) {
-        if(sub) {
-            return amount(-inc.getAmount());
-        }
-       return amount(inc.getAmount());
+    protected void sub(long val) {
+        add(-val);
     }
+    
+    public long val() {
+        return amount;
+    }
+    
+    protected boolean isLessThen(Resource res) {
+        return this.val() < res.val();
+    }
+    
+    protected boolean isMoreThen(Resource res) {
+        return res.isLessThen(this);
+    }
+    
+    protected boolean isEqualTo(Resource res) {
+        return !isLessThen(res) && !isMoreThen(res);
+    }
+    
+    protected boolean isMoreOrEqualThen(Resource res) {
+        return isMoreThen(res) || isEqualTo(res);
+    }
+    
+    protected boolean isLessOrEqualThen(Resource res) {
+        return isLessThen(res) || isEqualTo(res);
+    }
+    
     
 }

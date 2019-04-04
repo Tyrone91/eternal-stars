@@ -1,4 +1,4 @@
-package eternal.actions;
+package eternal.actions.game;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.game.control.UniverseHandler;
 import eternal.game.environment.Universe;
 import eternal.user.User;

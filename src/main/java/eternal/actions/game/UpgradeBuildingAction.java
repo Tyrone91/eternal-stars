@@ -1,9 +1,10 @@
-package eternal.actions;
+package eternal.actions.game;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.game.buildable.Building;
 import eternal.game.control.PlanetHandler;
 import eternal.game.environment.Planet;

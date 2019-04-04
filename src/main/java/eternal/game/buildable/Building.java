@@ -79,9 +79,9 @@ public class Building implements Updatable {
      */
     public Resources getCost() {
         double modifer = Math.pow(level + 1, 0.85);
-        long metal = Math.round(template.getBuildingCost().getMetal().getAmount() * modifer);
-        long crystal = Math.round(template.getBuildingCost().getCrystal().getAmount() * modifer);
-        long energy = Math.round(template.getBuildingCost().getEnergy().getAmount() * modifer);
+        long metal = Math.round(template.getBuildingCost().getMetal().val() * modifer);
+        long crystal = Math.round(template.getBuildingCost().getCrystal().val() * modifer);
+        long energy = Math.round(template.getBuildingCost().getEnergy().val() * modifer);
         return new Resources(metal, crystal, energy);
     }
     

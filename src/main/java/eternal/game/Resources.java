@@ -1,37 +1,20 @@
 package eternal.game;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import eternal.game.resources.Crystal;
+import eternal.game.resources.Energy;
+import eternal.game.resources.Metal;
 
-@Entity
 public class Resources {
     
-    private static final String METAL_TYPE = "METAL_TYPE", CRYSTAL_TYPE = "CRYSTAL_TYPE", ENERGY_TYPE = "ENERGY_TYPE";
+    private Crystal crystal = new Crystal();
+    private Metal metal = new Metal();
+    private Energy energy = new Energy();
     
-    @Id
-    @GeneratedValue
-    private int id;
-    
-    @JoinColumn
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Resource metal;
-    
-    @JoinColumn
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Resource crystal;
-    
-    @JoinColumn
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Resource energy;
     
     public Resources(long metal, long crystal, long energy) {
-        this.metal = new Resource(METAL_TYPE, metal);
-        this.crystal = new Resource(CRYSTAL_TYPE, crystal);
-        this.energy = new Resource(ENERGY_TYPE, energy);
+        this.metal = new Metal(metal);
+        this.crystal = new Crystal(crystal);
+        this.energy = new Energy(energy);
     }
     
     public Resources(Resources sources) {
@@ -42,57 +25,45 @@ public class Resources {
         this(0,0,0);
     }
 
-    public Resource getEnergy() {
-        return energy;
-    }
-
-    public Resource getMetal() {
+    public Metal getMetal() {
         return metal;
     }
 
-    public Resource getCrystal() {
+    public Crystal getCrystal() {
         return crystal;
+    }
+
+    public Energy getEnergy() {
+        return energy;
     }
     
     public long getEnergyAmount() {
-        return this.energy.getAmount();
+        return this.energy.val();
     }
     
     public long getMetalAmount() {
-        return this.metal.getAmount();
+        return this.metal.val();
     }
     
     public long getCrystalAmount() {
-        return this.crystal.getAmount();
+        return this.crystal.val();
     }
     
     public void add(Resources res) {
-        this.metal = new Resource(this.metal).amount(res.getMetal());
-        this.crystal = new Resource(this.crystal).amount(res.getCrystal());
-        this.energy = new Resource(this.energy).amount(res.getEnergy());
+        this.metal = this.metal.add(res.getMetal());
+        this.crystal = this.crystal.add(res.getCrystal());
+        this.energy = this.energy.add(res.getEnergy());
     }
 
     public void sub(Resources res) {
-        this.metal = new Resource(this.metal).amount(res.getMetal(), true);
-        this.crystal = new Resource(this.crystal).amount(res.getCrystal(), true);
-        this.energy = new Resource(this.energy).amount(res.getEnergy(), true);
+        this.metal = this.metal.sub(res.getMetal());
+        this.crystal = this.crystal.sub(res.getCrystal());
+        this.energy = this.energy.sub(res.getEnergy());
     }
 
     public boolean isPayable(Resources res) {
-        if(res.getMetal().getAmount() > this.metal.getAmount()) {
-            return false;
-        }
-        
-        if(res.getCrystal().getAmount() > this.crystal.getAmount()) {
-            return false;
-        }
-        
-        if(res.getEnergy().getAmount() > this.crystal.getAmount()) {
-            return false;
-        }
-        
-        return true;
+        return this.metal.isMoreOrEqualThen(res.metal) &&
+               this.crystal.isMoreOrEqualThen(res.crystal) &&
+               this.energy.isMoreOrEqualThen(res.energy);
     }
-    
-    
 }

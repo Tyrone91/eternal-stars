@@ -103,21 +103,21 @@ public class GameControls implements Serializable {
         if(!valid()) {
             return 0;
         }
-        return planet.getPlanetResources().getMetal().getAmount();
+        return planet.getPlanetResources().getMetal().val();
     }
     
     public long getPlanetCrystal() {
         if(!valid()) {
             return 0;
         }
-        return planet.getPlanetResources().getCrystal().getAmount();
+        return planet.getPlanetResources().getCrystal().val();
     }
     
     public long getPlanetEnergy() {
         if(!valid()) {
             return 0;
         }
-        return planet.getPlanetResources().getEnergy().getAmount();
+        return planet.getPlanetResources().getEnergy().val();
     }
     
     public long getPlanetMetalGain() {

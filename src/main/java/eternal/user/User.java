@@ -12,14 +12,12 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
-import eternal.game.TradeOffer;
 import eternal.game.control.GameAccount;
+import eternal.mangement.GameAccountHandler;
 
 @Entity
 public class User implements Serializable {
@@ -39,9 +37,6 @@ public class User implements Serializable {
     @JoinTable
     private Set<UserRole> roles;
     
-    @OneToMany(mappedBy = "initiator", fetch = FetchType.EAGER)
-    private Set<TradeOffer> tradeOffers = new HashSet<>();
-    
     private transient GameAccount gameAccount;
     
     public User() {
@@ -51,6 +46,10 @@ public class User implements Serializable {
         this.lastLogin = null;
     }
     
+    /**
+     * This field is only set, if this User has logged in with this account. Otherwise use the {@link GameAccountHandler}.
+     * @return
+     */
     public Optional<GameAccount> getGameAccount() {
         return Optional.ofNullable(gameAccount);
     }
@@ -139,17 +138,5 @@ public class User implements Serializable {
     
     public List<UserRole> getRolesAsList() {
         return new ArrayList<>(getRoles());
-    }
-    
-    public void addTradeOffer(TradeOffer offer) {
-        this.tradeOffers.add(offer);
-    }
-    
-    public void removeTradeOffer(TradeOffer offer) {
-        this.tradeOffers.remove(offer);
-    }
-    
-    public List<TradeOffer> getTradeOffers() {
-        return new ArrayList<>(this.tradeOffers);
     }
 }

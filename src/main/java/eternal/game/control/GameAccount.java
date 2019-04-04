@@ -1,9 +1,15 @@
 package eternal.game.control;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import eternal.core.GameContext;
+import eternal.game.TradeOffer;
 import eternal.user.User;
 
 /**
@@ -21,8 +27,14 @@ public class GameAccount {
     private String displayName;
     
     private int homePlanetId;
+    
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.EAGER)
+    private Set<TradeOffer> receivedTradeOffers = new HashSet<>();
+    
+    @OneToMany(mappedBy = "initiator", fetch = FetchType.EAGER)
+    private Set<TradeOffer> sendTradeOffers = new HashSet<>();
 
-    public String getId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
@@ -32,10 +44,6 @@ public class GameAccount {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
-    }
-
-    public String getOwnerId() {
-        return getOwnerId();
     }
 
     public void setOwnerId(User owner) {
@@ -52,5 +60,29 @@ public class GameAccount {
     
     public void onload(GameContext context) {
             
+    }
+    
+    public void addReceivedTradeOffer(TradeOffer offer) {
+        this.receivedTradeOffers.add(offer);
+    }
+    
+    public void addSendTradeOffer(TradeOffer offer) {
+        this.receivedTradeOffers.add(offer);
+    }
+    
+    public void removeReceivedTradeOffer(TradeOffer offer) {
+        this.receivedTradeOffers.remove(offer);
+    }
+    
+    public void removeSendTradeOffer(TradeOffer offer) {
+        this.sendTradeOffers.remove(offer);
+    }
+    
+    public Set<TradeOffer> getReceivedTradeOffers() {
+        return this.receivedTradeOffers;
+    }
+    
+    public Set<TradeOffer> getSendTradeOffers() {
+        return this.sendTradeOffers;
     }
 }

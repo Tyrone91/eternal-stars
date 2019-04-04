@@ -1,4 +1,4 @@
-package eternal.actions;
+package eternal.actions.user;
 
 import java.util.Optional;
 
@@ -6,6 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import eternal.actions.AbstractAction;
 import eternal.mangement.LoginHandler;
 import eternal.requests.LoginRequest;
 import eternal.session.SessionContext;

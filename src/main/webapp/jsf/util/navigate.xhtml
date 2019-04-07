@@ -1,0 +1,14 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<ui:param name="name" value="#{empty name ? 'OK': name}"/>
+	<ui:param name="name" value="#{empty outcome ? 'MISSING_NAVIGATION_OUTCOME': name}"/>
+	<h:commandButton action="#{pageControl.view(outcome)}" value="#{name}" styleClass="navigate-button">
+		<f:ajax render="@form" execute="@form"/>
+	</h:commandButton>
+	
+</ui:composition>

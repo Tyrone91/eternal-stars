@@ -1,0 +1,30 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	<h:outputScript library="js" name="main.js" />
+	<div class="fit-to-parent flex-column game-body">
+		
+		<h:panelGroup styleClass="game-header" id="game-header">
+			<ui:include src="/game-header.xhtml"/>
+	    </h:panelGroup>
+	    
+	    <h:panelGroup styleClass="game-content-wrapper">
+	    
+	    	<h:panelGroup styleClass="game-control-menu">  			
+	    		<ui:repeat var="control" value="#{gameControls.controls}">
+	    			<h:commandButton value="#{control.label}" action="#{gameControls.setCurrentFocus(control)}">
+						<f:ajax execute="@this" render="main-content"/>
+					</h:commandButton>
+	    		</ui:repeat>    	
+	    	</h:panelGroup>
+	    		
+	    	<h:panelGroup styleClass="main-content" id="main-content" >
+	    		<ui:include src="#{gameControls.currentFocus.outcome}"/>
+	    	</h:panelGroup>
+	    	
+	    </h:panelGroup>
+	</div>
+</ui:composition>

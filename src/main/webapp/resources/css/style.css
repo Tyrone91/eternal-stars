@@ -1,6 +1,7 @@
 * {
 	margin: 0px;
 	padding: 0px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -71,8 +72,12 @@ form input[type="text"]{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-} 
+}
 
+#placeholder-resource-pull-button,
+.hidden {
+	display: none;
+}
 .login-background {
 	background-color: black;
 	color: white;
@@ -103,4 +108,15 @@ form input[type="text"]{
 .login-form input[type="submit"] {
 	padding: 0.5em;
 	width: 12em;
+}
+.navigate-button {
+	border: none;
+	text-decoration: underline;
+	color: lightblue;
+	background: none;
+	font-size: 1.2em;
+}
+.navigate-button:hover {
+	text-decoration: underline white;
+	cursor: pointer;
 }

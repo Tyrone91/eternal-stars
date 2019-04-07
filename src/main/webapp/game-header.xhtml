@@ -32,7 +32,7 @@
 	    		<h:outputText value="Energy: #{gameControls.planetEnergy}" styleClass="resource resource-energy"/>
 	    		-->
 	    		
-	    		<h:commandButton id="placeholder-resource-pull-button">
+	    		<h:commandButton id="placeholder-resource-pull-button" styleClass="hidden">
 	    			<f:ajax render="resource-view" execute="@this" onerror="stopPullingResources"/>
 	    		</h:commandButton>
 	    	</h:panelGroup>

@@ -4,3 +4,10 @@
 /.settings
 **/images/*
 
+**/fonts/*
+**/font-awesome/css/*
+**/font-awesome/webfonts/*
+
+!**/fonts/readme.txt
+!**/font-awesome/css/readme.txt
+!**/font-awesome/webfonts/readme.txt

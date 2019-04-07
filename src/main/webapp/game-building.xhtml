@@ -26,6 +26,11 @@
     				</h:panelGroup>
     				<h:commandButton value="Upgrade" action="#{interactionHandler.upgradeBuilding(building)}"> <f:ajax execute="@form" render="building-list resource-view"/> </h:commandButton>
     			</h:panelGroup>
+    			
+    			<ui:include src="/jsf/game/building/building.xhtml">
+    				<ui:param name="value" value="#{building}" />
+    			</ui:include>
+    			
     		</ui:repeat>
     	</h:panelGroup>
     </h:body>

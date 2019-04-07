@@ -1,0 +1,28 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<div>
+		<span>
+			<ui:include src="/jsf/game/resources/metal.xhtml">
+				<ui:param name="value" value="#{value}" />
+			</ui:include>
+		</span>
+		
+		<span>
+			<ui:include src="/jsf/game/resources/crystal.xhtml">
+				<ui:param name="value" value="#{value}" />
+			</ui:include>
+		</span>
+		
+		<span>
+			<ui:include src="/jsf/game/resources/energy.xhtml">
+				<ui:param name="value" value="#{value}" />
+			</ui:include>
+		</span>
+	</div>
+	
+</ui:composition>

@@ -1,0 +1,18 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<span class="resource-tag">
+		<span>
+			<h:graphicImage library="images" name="#{empty icon ? 'MISSING_ICON' : icon}" styleClass="resource-icon" alt="#{empty name ? 'MISSING' : name}"/>
+		</span>
+		
+		<span>
+			<h:outputText value="#{value.val()}"/>
+		</span>
+	</span>
+	
+</ui:composition>

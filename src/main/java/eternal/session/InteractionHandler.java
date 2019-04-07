@@ -109,8 +109,18 @@ public class InteractionHandler implements Serializable {
     @Inject
     private TradeInteractionHandler tradeInteractionHandler;
     
+    @Inject
+    private PageControl pageControl;
+    
     public Optional<User> login(LoginRequest request) {
         return loginAction.performAction(sessionContext.getUser(), request);
+    }
+    
+    public void loginNEW(LoginRequest request) {
+        Optional<User> user = login(request);
+        if(user.isPresent()) {
+            pageControl.view("game");
+        }
     }
     
     public String loginWithRedirect(LoginRequest request) {
@@ -139,6 +149,17 @@ public class InteractionHandler implements Serializable {
     public Optional<User> register(RegistrationRequest request) {
         return registrationAction.performAction(sessionContext.getUser(), request);
     }
+    
+    public void registrationNEW(GameAccountRegistrationRequest request) {
+        Optional<User> user = registerWithGameAccount(request);
+        if(!user.isPresent()) {
+            return;
+        }
+        loginRequest.setPassword(user.get().getPassword());
+        loginRequest.setUsername(user.get().getUsername());
+        loginNEW(loginRequest);
+    }
+    
     
     public Optional<User> registerWithGameAccount(GameAccountRegistrationRequest request) {
         Optional<User> user = registrationAction.performAction(sessionContext.getUser(), request);

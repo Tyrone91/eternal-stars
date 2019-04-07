@@ -1,0 +1,32 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+		
+	<div>
+		<div>
+			<span>
+				<h:outputText value="#{value.name}"/>
+			</span>
+		</div>
+		
+		<div>
+			<h:outputText value="#{value.description}"/>
+		</div>
+		
+		<div>
+			<ui:include src="/jsf/game/resources/resources.xhtml" >
+				<ui:param name="value" value="#{value.gainPerMinute}" />
+			</ui:include>
+		</div>
+		
+		<h:commandButton value="Upgrade">
+			<f:ajax render="@all" execute="@all"/>
+		</h:commandButton>
+			
+	
+	</div>
+	
+</ui:composition>

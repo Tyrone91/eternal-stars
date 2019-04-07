@@ -2,7 +2,6 @@ let RESOURCE_PULL = true;
 
 function pullResources() {
 	const button = document.getElementById("placeholder-resource-pull-button");
-	button.style = "display: none";
 
 	const request = () => {
 		button.click();
@@ -19,5 +18,8 @@ function stopPullingResources() {
 }
 
 window.addEventListener("load", event => {
+	console.log("found");
 	pullResources();
+	
 });
+

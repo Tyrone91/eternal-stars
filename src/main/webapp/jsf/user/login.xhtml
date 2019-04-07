@@ -1,0 +1,39 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	<h:panelGroup styleClass="centered-content login-background screen-fit">
+		<h:graphicImage library="images" name="eternal-stars-logo.png" />
+		
+		<div class="login-form">
+			
+			<h:panelGroup styleClass="action-group">
+				<h:outputLabel for="username-input" value="Username"/>
+				<h:inputText id="username-input" value="#{loginRequest.username}" />	
+			</h:panelGroup>
+			
+			<h:panelGroup styleClass="action-group">
+				<h:outputLabel for="password-input" value="Password"/>
+				<h:inputText id="password-input" value="#{loginRequest.password}" />
+			</h:panelGroup>
+			
+			<h:commandButton value="Login" action="#{interactionHandler.loginNEW(loginRequest)}" styleClass="fas fa-sign-in-alt">
+				<f:ajax execute="@form" render="@form"/>
+ 			</h:commandButton>
+ 			
+ 		
+ 			<h:outputText value="#{loginRequest.response}" styleClass="slow-fade-out"></h:outputText>
+ 			<h:outputText value="#{errorResponse.message}"></h:outputText>
+		</div>
+		
+		<h:panelGroup>
+			<ui:include src="/jsf/util/navigate.xhtml">
+				<ui:param name="outcome" value="registration" />
+				<ui:param name="name" value="Need an Account?" />
+			</ui:include>
+		</h:panelGroup>
+		
+	</h:panelGroup>
+</ui:composition>

@@ -1,0 +1,44 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<h:panelGroup styleClass="centered-content login-background screen-fit">	
+    		<h:graphicImage library="images" name="eternal-stars-logo.png" />
+		    <div class="custom-form">
+		    	<h:outputLabel value="Username">
+		    		<h:inputText value="#{gameAccountRegistrationRequest.username}"/>
+		    	</h:outputLabel>
+		    	
+		    	<h:outputLabel value="Email">
+		    		<h:inputText value="#{gameAccountRegistrationRequest.email}"/>
+		    	</h:outputLabel>
+		    	
+		    	<h:outputLabel value="Password">
+		    		<h:inputText value="#{gameAccountRegistrationRequest.password}"/>
+		    	</h:outputLabel>
+		    	
+		    	<h:outputLabel value="Confirm password">
+		    		<h:inputText value="#{gameAccountRegistrationRequest.passwordConfirmation}"/>
+		    	</h:outputLabel>
+		    	
+		    	<!--  
+		    	<h:commandButton value="Register" action="#{interactionHandler.registerWithGameAccount(gameAccountRegistrationRequest)}">
+		    		<f:ajax render="@form user-list" execute="@form user-list"/>
+		    	</h:commandButton>
+		    	-->
+		    	<h:commandButton value="Register" action="#{interactionHandler.registrationNEW(gameAccountRegistrationRequest)}">
+		    		<f:ajax render="@form user-list" execute="@form user-list"/>
+		    	</h:commandButton>
+		    	
+		    	<h:outputText value="#{gameAccountRegistrationRequest.response}" styleClass="slow-fade-out"></h:outputText>
+		    	<h:outputText value="#{errorResponse.message}" styleClass="slow-fade-out"></h:outputText>
+		    </div>
+		    <ui:include src="/jsf/util/navigate.xhtml">
+				<ui:param name="outcome" value="login" />
+				<ui:param name="name" value="I alreay have an Account" />
+			</ui:include>
+	    </h:panelGroup>
+</ui:composition>

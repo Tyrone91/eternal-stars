@@ -4,9 +4,16 @@
  	xmlns:h="http://java.sun.com/jsf/html"
   	xmlns:ui="http://java.sun.com/jsf/facelets"
 	>
-	<h:panelGroup styleClass="centered-content login-background screen-fit">
+	<h:panelGroup styleClass="centered-content login-background">
 		<h:graphicImage library="images" name="eternal-stars-logo.png" />
-		
+		<h1 class="page-headline">Login</h1>
+		<div class="headline-subtitle">
+			<ui:include src="/jsf/util/navigate.xhtml"> 
+				<ui:param name="outcome" value="registration" />
+				<ui:param name="name" value="Need an Account?" />
+			</ui:include>
+		</div>
+			
 		<div class="login-form">
 			
 			<h:panelGroup styleClass="action-group">
@@ -19,22 +26,16 @@
 				<h:inputText id="password-input" value="#{loginRequest.password}" />
 			</h:panelGroup>
 			
-			<span class="fas fa-sign-in-alt"/>
-			<h:commandButton value="Login" action="#{interactionHandler.loginNEW(loginRequest)}" styleClass="fas fa-sign-in-alt">
+			
+			<h:commandLink value="Login" action="#{interactionHandler.loginNEW(loginRequest)}" styleClass="login-submit">
 				<f:ajax execute="@form" render="@form"/>
- 			</h:commandButton>
+			</h:commandLink>
+			
  			
  		
  			<h:outputText value="#{loginRequest.response}" styleClass="slow-fade-out"></h:outputText>
  			<h:outputText value="#{errorResponse.message}"></h:outputText>
 		</div>
-		
-		<h:panelGroup>
-			<ui:include src="/jsf/util/navigate.xhtml">
-				<ui:param name="outcome" value="registration" />
-				<ui:param name="name" value="Need an Account?" />
-			</ui:include>
-		</h:panelGroup>
 		
 	</h:panelGroup>
 </ui:composition>

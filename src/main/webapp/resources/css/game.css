@@ -12,10 +12,11 @@ a {
     background: black;
     flex-grow: 1;
     color: white;
-    height: 100vh;
-    width: 100vw;
+	background: url("#{resource['images:universe-background.jpg']}");
     padding: 0.0em 0em 0.5em 0.5em;;
     box-sizing: border-box;
+    max-height: 100vh;
+    overflow: hidden
 }
 .game-header {
     display: flex;
@@ -23,6 +24,7 @@ a {
     width: 100%;
     min-height: 30px;
     align-items: flex-start;
+    min-height: 175px;
 }
 .game-header .user-view {
 	padding-top: 0.5em;
@@ -76,6 +78,8 @@ a {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    overflow: auto;
+    max-height: 100vh;
 }
 .building-list {
     display: flex;

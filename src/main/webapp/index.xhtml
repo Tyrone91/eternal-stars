@@ -20,9 +20,10 @@
         	<h:outputText value="#{eternalStarApp.name}"></h:outputText>
         </title>
 	</h:head>
-	<h:body>
-		<h:form prependId="false">
+	<h:body styleClass="page-wrapper">
+		<h:form prependId="false" styleClass="page-content">
 			<ui:include src="#{pageControl.currentView}" />
 		</h:form>
+		<ui:include src="footer.xhtml" />
 	</h:body>
 </html>

@@ -5,9 +5,19 @@
   	xmlns:ui="http://java.sun.com/jsf/facelets"
 	>
 	
-	<h:panelGroup styleClass="centered-content login-background screen-fit">	
+	<h:panelGroup styleClass="centered-content login-background">	
     		<h:graphicImage library="images" name="eternal-stars-logo.png" />
-		    <div class="custom-form">
+    		
+    		<h1 class="page-headline">Registration</h1>
+    		<div class="headline-subtitle">
+    			<ui:include src="/jsf/util/navigate.xhtml">
+					<ui:param name="outcome" value="login" />
+					<ui:param name="name" value="I alreay have an Account" />
+				</ui:include>
+    		</div>
+    		
+			
+		    <div class="registration-page custom-form centered-content">
 		    	<h:outputLabel value="Username">
 		    		<h:inputText value="#{gameAccountRegistrationRequest.username}"/>
 		    	</h:outputLabel>
@@ -24,21 +34,12 @@
 		    		<h:inputText value="#{gameAccountRegistrationRequest.passwordConfirmation}"/>
 		    	</h:outputLabel>
 		    	
-		    	<!--  
-		    	<h:commandButton value="Register" action="#{interactionHandler.registerWithGameAccount(gameAccountRegistrationRequest)}">
+		    	<h:commandLink value="Register" action="#{interactionHandler.registrationNEW(gameAccountRegistrationRequest)}" styleClass="registration-submit">
 		    		<f:ajax render="@form user-list" execute="@form user-list"/>
-		    	</h:commandButton>
-		    	-->
-		    	<h:commandButton value="Register" action="#{interactionHandler.registrationNEW(gameAccountRegistrationRequest)}">
-		    		<f:ajax render="@form user-list" execute="@form user-list"/>
-		    	</h:commandButton>
+		    	</h:commandLink>
 		    	
 		    	<h:outputText value="#{gameAccountRegistrationRequest.response}" styleClass="slow-fade-out"></h:outputText>
-		    	<h:outputText value="#{errorResponse.message}" styleClass="slow-fade-out"></h:outputText>
 		    </div>
-		    <ui:include src="/jsf/util/navigate.xhtml">
-				<ui:param name="outcome" value="login" />
-				<ui:param name="name" value="I alreay have an Account" />
-			</ui:include>
+		    
 	    </h:panelGroup>
 </ui:composition>

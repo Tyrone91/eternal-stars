@@ -19,6 +19,7 @@
 				<h:inputText id="password-input" value="#{loginRequest.password}" />
 			</h:panelGroup>
 			
+			<span class="fas fa-sign-in-alt"/>
 			<h:commandButton value="Login" action="#{interactionHandler.loginNEW(loginRequest)}" styleClass="fas fa-sign-in-alt">
 				<f:ajax execute="@form" render="@form"/>
  			</h:commandButton>

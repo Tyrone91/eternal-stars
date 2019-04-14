@@ -8,6 +8,7 @@
       >
      
     <h:body>
+    <h1>Account</h1>
     <h:panelGrid styleClass="user-account-edit">
     	<h:panelGroup styleClass="custom-form" id="edit-nickname-form">
     		<h:panelGroup styleClass="form-group">
@@ -16,9 +17,9 @@
     		</h:panelGroup>
     		
     		<h:commandButton value="OK" action="#{interactionHandler.editOwnNickname(editNicknameRequest)}">
-    			<f:ajax execute="@form" render="edit-nickname-form header-user-information"/>
+    			<f:ajax execute="@form" render="request-response-output edit-nickname-form header-user-information"/>
     		</h:commandButton>
-    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    		
     	</h:panelGroup>
     	
     	<h:panelGroup styleClass="custom-form" id="edit-email-form">    	
@@ -28,9 +29,9 @@
     		</h:panelGroup>
     		
     		<h:commandButton value="OK" action="#{interactionHandler.editOwnEmail(editEmailRequest)}">
-    			<f:ajax execute="@form" render="edit-email-form"/>
+    			<f:ajax execute="@form" render="request-response-output edit-email-form"/>
     		</h:commandButton>
-    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    		
     	</h:panelGroup>
     	
     	<h:panelGroup styleClass="custom-form" id="edit-password-form">
@@ -50,9 +51,9 @@
     		</h:panelGroup>
     		
     		<h:commandButton value="OK" action="#{interactionHandler.editOwnPassword(editPasswordRequest)}">
-    			<f:ajax execute="@form" render="edit-password-form"/>
+    			<f:ajax execute="@form" render="request-response-output edit-password-form"/>
     		</h:commandButton>
-    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
+    		
     	</h:panelGroup>
     	</h:panelGrid>
     </h:body>

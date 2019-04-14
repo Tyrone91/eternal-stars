@@ -26,64 +26,68 @@ public class UserHandler implements Serializable {
 
     @Inject
     private ExceptionHandler exceptionHandler;
-    
+
     @Inject
     private UserDataAccessObject userDAO;
-    
+
     @Inject
     private GameAccountRemover gameAccountRemover;
-    
+
     public Set<User> getAllRegisteredUsers() {
         return userDAO.fetchAllUsers();
     }
-    
+
     public List<User> getAllRegisteredUsersAsList() {
         return new ArrayList<>(userDAO.fetchAllUsers());
     }
-    
+
     public Optional<User> find(String username) {
         return userDAO.loadUser(username);
     }
-    
-    public Optional<User> createNewUser(String username, String passwrod, String email, UserRole...roles ) {
+
+    public Optional<User> createNewUser(String username, String passwrod, String email, UserRole... roles) {
         try {
-            if(find(username).isPresent()) {
+            if (find(username).isPresent()) {
                 return Optional.empty();
             }
-            
+
             final User u = new User();
             u.setUserName(username);
             u.setPassword(passwrod);
             u.setEmail(email);
-            u.setRoles( new HashSet<>(Arrays.asList(roles)));
-            
-            if(!userDAO.storeUser(u)) {
+            u.setRoles(new HashSet<>(Arrays.asList(roles)));
+
+            if (!userDAO.storeUser(u)) {
                 return Optional.empty();
             }
-            
+
             return Optional.of(u);
-        } catch(Exception e) {
+        } catch (Exception e) {
             exceptionHandler.handleException(e);
         }
         return Optional.empty();
     }
-    
+
     public boolean updateUser(User u) {
         return userDAO.updateUser(u);
     }
-    
+
     public boolean deleteUser(User u) {
         return deleteUser(u.getUsername());
     }
-    
+
     public boolean deleteUser(String username) {
         try {
-            gameAccountRemover.removeAccount(username); //The GameAccount has the same id as the user. If no GameAccout is found we lost nothing
+            gameAccountRemover.removeAccount(username); // The GameAccount has
+                                                        // the same id as the
+                                                        // user. If no
+                                                        // GameAccout is found
+                                                        // we lost nothing
             return userDAO.deleteUser(username);
-        } catch(Exception e) {
+        } catch (Exception e) {
             exceptionHandler.handleException(e);
             return false;
         }
     }
- 
+
 }

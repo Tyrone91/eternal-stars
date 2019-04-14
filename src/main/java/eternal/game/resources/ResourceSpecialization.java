@@ -2,7 +2,7 @@ package eternal.game.resources;
 
 import eternal.game.Resource;
 
-public class ResourceSpecialization<T extends Resource> extends Resource {
+public class ResourceSpecialization<T extends Resource> extends Resource implements Comparable<ResourceSpecialization<T>> {
     
     protected ResourceSpecialization(long initial) {
         super(initial);
@@ -37,5 +37,17 @@ public class ResourceSpecialization<T extends Resource> extends Resource {
     public ResourceSpecialization<T> add(ResourceSpecialization<T> res) {
         super.add(res.val());
         return this;
+    }
+
+    @Override
+    public int compareTo(ResourceSpecialization<T> r2) {
+        final ResourceSpecialization<T> r1 = this;
+        if(r1.isLessThen(r2)) {
+            return -1;
+        }
+        if(r1.isMoreThen(r2)) {
+            return 1;
+        }
+        return 0;
     }
 }

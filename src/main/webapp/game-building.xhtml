@@ -9,7 +9,6 @@
      
     <h:body >
     	<h:panelGroup styleClass="building-list" id="building-list">
-    		<h:outputText value="#{requestResponse.message}" styleClass="slow-fade-out"/>
     		<ui:repeat var="building" value="#{gameControls.buildings}">
     			<h:panelGroup styleClass="building-panel">
     				<h:outputText value="#{building.name}" styleClass="building-title"/>
@@ -24,13 +23,10 @@
     					<h:outputText value="Crystl/min: #{building.gainPerMinute.crystalAmount} -> #{building.gainPerMinuteAfterUpgrade.crystalAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).crystalAmount})" styleClass="resource resource-crystal"/>
     					<h:outputText value="Energy/min: #{building.gainPerMinute.energyAmount} -> #{building.gainPerMinuteAfterUpgrade.energyAmount} (+#{gameControls.getResourceGainUpgradeDifference(building).energyAmount})" styleClass="resource resource-energy"/>
     				</h:panelGroup>
-    				<h:commandButton value="Upgrade" action="#{interactionHandler.upgradeBuilding(building)}"> <f:ajax execute="@form" render="building-list resource-view"/> </h:commandButton>
+    				<h:commandButton value="Upgrade" action="#{interactionHandler.upgradeBuilding(building)}">
+    					<f:ajax execute="@form" render="request-response-output building-list resource-view"/>
+    				</h:commandButton>
     			</h:panelGroup>
-    			
-    			<ui:include src="/jsf/game/building/building.xhtml">
-    				<ui:param name="value" value="#{building}" />
-    			</ui:include>
-    			
     		</ui:repeat>
     	</h:panelGroup>
     </h:body>

@@ -1,0 +1,50 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<h:outputScript library="js" name="collapsible.js" />
+	
+	<div class="message-viewer">
+		<div class="message-viewer-controls">
+			<h:commandButton value="Back" action="#{messageControls.backToMessages()}"/>
+			<h:commandLink value="Delete Message" action="#{messageControls.deleteMessage(messageControls.selectedMessage)}" styleClass="fas fa-times red"/>
+		</div>
+		<div class="message-viewer-header collapsible" data-title="Message Information">
+			<div class="message-viewer-information-field">
+				<span class="label">From: </span>
+				<h:outputText value="#{messageControls.selectedMessage.sender.username}" styleClass="fake-input"/>
+			</div>
+			
+			<div class="message-viewer-information-field">
+				<span class="label">To: </span>
+				<h:outputText value="#{messageControls.selectedMessage.receiver.username}" styleClass="fake-input"/>
+			</div>
+			
+			<div class="message-viewer-information-field">
+				<span class="label">Subject: </span>
+				<h:outputText value="#{messageControls.selectedMessage.subject}" styleClass="fake-input"/>
+			</div>
+			
+			<div class="message-viewer-information-field">
+				<span class="label">Date: </span>
+				<h:outputText value="#{messageControls.selectedMessage.sendDate}" styleClass="fake-input"/> <!-- TODO: convert date before -->
+			</div>
+		</div>
+		
+		<div class="message-viewer-message collapsible" data-title="Message">
+			<h:outputText value="#{messageControls.selectedMessage.message}"/>
+		</div>
+		
+		<h:panelGroup rendered="#{not messageControls.selectedMessageReadOnly}">
+			<div class="message-viewer-answer collapsible" data-title="Answer">
+				<h:inputTextarea value="#{sendMessageAnswerRequest.message}" styleClass="message-input"/>
+				<h:commandButton value="Send" action="#{messageControls.sendAnswer()}"/>
+			</div>
+		</h:panelGroup>
+		
+		
+	</div>
+</ui:composition>

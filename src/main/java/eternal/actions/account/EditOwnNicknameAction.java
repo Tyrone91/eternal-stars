@@ -48,6 +48,7 @@ public class EditOwnNicknameAction extends AbstractAction<Boolean, EditNicknameR
         account.get().setDisplayName(request.getNickname());
         gameAccountDAO.updateAccount(account.get());
         response.setMessage("Nickname updated");
+        response.setBad(false);
         return true;
     }
 

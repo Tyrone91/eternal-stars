@@ -5,6 +5,11 @@
 	
 	<display-name>Archetype Created Web Application</display-name>
 	
+	<error-page>
+    	<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    	<location>/index.xhtml?faces-redirect=true</location>
+	</error-page>
+	
 	<servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -17,6 +22,6 @@
     </servlet-mapping>
 	
 	<welcome-file-list>
-        <welcome-file>login.xhtml</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

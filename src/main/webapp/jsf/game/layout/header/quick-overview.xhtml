@@ -1,0 +1,20 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<div>
+		<div>
+			<h:outputText value="#{messageControls.unreadMessages}" styleClass="far fa-envelope" id="quick-message-view"/>
+		</div>
+		
+		<h:panelGroup id="request-response-output" rendered="#{requestResponse.displayed}">
+			<div>
+				<ui:param name="class" value="#{requestResponse.bad ? 'fas fa-exclamation-triangle red' : 'fas fa-check green'}" />
+				<h:outputText value="#{requestResponse.message}" styleClass="#{class} slow-fade-out" />
+			</div>
+		</h:panelGroup>
+	</div>
+</ui:composition>

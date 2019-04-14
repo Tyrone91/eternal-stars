@@ -1,0 +1,24 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+      
+    <div class="game-header">
+    	<span>
+    		<h:graphicImage library="images" name="eternal-stars-logo.png" />
+    	</span>
+    	<div class="header-columns">
+    		<div class="user-control">
+    			<ui:include src="/jsf/game/layout/header/user-control.xhtml" />
+    		</div>
+    		<div class="resource-view">
+    			<ui:include src="/jsf/game/layout/header/resource-view.xhtml" />
+    		</div>
+    		<div class="quick-overview">
+    			<ui:include src="/jsf/game/layout/header/quick-overview.xhtml" />
+    		</div>
+    	</div>
+    </div>
+</ui:composition>

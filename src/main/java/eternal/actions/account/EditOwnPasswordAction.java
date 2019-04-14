@@ -54,6 +54,7 @@ public class EditOwnPasswordAction extends AbstractAction<Boolean, EditPasswordR
         user.setPassword(request.getNewPassword());
         userHandler.updateUser(user);
         response.setMessage("Password updated");
+        response.setBad(false);
         return true;
     }
 

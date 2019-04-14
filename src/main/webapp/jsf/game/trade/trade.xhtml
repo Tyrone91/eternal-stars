@@ -1,0 +1,23 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<h:outputScript library="js" name="collapsible.js" />
+	
+	<div class="game-trade-hub">
+		<h1>Tradehub</h1>
+		<div class="collapsible" data-title="Create offer">
+			<ui:include src="/jsf/game/trade/create-offer.xhtml" />
+		</div>
+		
+		<div>
+			<ui:include src="/jsf/game/trade/trade-offers.xhtml" />
+		</div>
+		
+		
+	</div>
+	
+</ui:composition>

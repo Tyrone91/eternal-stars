@@ -20,6 +20,7 @@ public class PageControl implements Serializable {
     private static final String LOGIN_PAGE = "/jsf/user/login.xhtml";
     private static final String REGISTRATION_PAGE = "/jsf/user/registration.xhtml";
     private static final String GAME_PAGE = "/jsf/game/game.xhtml";
+    private static final String ADMIN_PAGE = "/jsf/admin/admin.xhtml";
     
     private static final String FALLBACK_PAGE = LOGIN_PAGE;
     
@@ -29,7 +30,8 @@ public class PageControl implements Serializable {
         page(
                 "login", LOGIN_PAGE,
                 "registration", REGISTRATION_PAGE,
-                "game", GAME_PAGE);
+                "game", GAME_PAGE,
+                "admin", ADMIN_PAGE);
     }
     
     @PostConstruct

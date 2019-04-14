@@ -5,3 +5,108 @@
 .resource-tag {
 	
 }
+
+.header-columns {
+	display: flex;
+	flex-direction: column;
+}
+
+.message-viewer .collapsible-title,
+.message-center .collapsible-title,
+.game-trade-hub .collapsible-title,
+.game-content-wrapper .collapsible-title {
+	color: white;
+	box-shadow: 1px 1px 5px grey;
+	background-color: #00005fb3
+}
+
+.message-viewer .collapsible-title:not(:hover),
+.message-cente .collapsible-title:not(:hover),
+.game-trade-hub .collapsible-title:not(:hover),
+.game-content-wrapper .main-content .collapsible-title:not(:hover) {
+	border-color: white;
+}
+
+.message-viewer .collapsible,
+.message-center .collapsible,
+.game-trade-hub .collapsible,
+.game-content-wrapper .main-content .collapsible  {
+	color: white;
+	border-color: white;
+	background-color: #5e6af21a;
+	box-shadow: 1px 1px 5px grey;
+}
+
+.game-content-wrapper .main-content .collapsible {
+	padding: 0.5em;
+}
+
+.game-content-wrapper .main-content .sortable-table thead {
+	background-color: #bf3305cc;
+}
+
+.game-content-wrapper .main-content .sortable-table tbody tr:nth-child(even) {
+	background-color: #003e7be6;
+	
+}
+
+.game-content-wrapper .main-content .sortable-table tbody tr:nth-child(odd) {
+	background-color: #214369b3;
+}
+
+.game-content-wrapper .main-content .sortable-table a {
+	font-family: "Open Sans","Font Awesome 5 Free" !important;
+	color: white;	
+}
+
+
+
+.green {
+	color: green !important;
+}
+
+.red {
+	color: red !important;
+}
+.message-input {
+	width: 20em;
+	display: inline-block;
+	height: 5em;
+}
+.message-viewer .message-viewer-message.collapsible {
+	white-space: pre;
+	background-color: white;
+	color: black;
+	padding: 1em;
+	font-size: 1.1em;
+	box-shadow: inset 1px 1px 5px gray;
+	display: inline-block;
+}
+
+.message-viewer-information-field {
+
+}
+
+.message-viewer-information-field .label {
+	min-width: 4em;
+	display: inline-block;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: right;
+	margin-right: 0.5em;
+}
+
+.message-vieewer-information-field {
+
+}
+
+.message-viewer .fake-input {
+	padding: 0.5em;
+	min-width: 12em;
+	border: 1px solid black;
+	background-color: lightgrey;
+	box-shadow: inset 3px 2px 3px gray;
+	color: black;
+	display: inline-block;
+}
+

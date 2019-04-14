@@ -12,6 +12,5 @@ public interface UserDataAccessObject {
     public boolean updateUser(User user);
     public Optional<User> loadUser(String username);
     public boolean deleteUser(String username);
-    
 
 }

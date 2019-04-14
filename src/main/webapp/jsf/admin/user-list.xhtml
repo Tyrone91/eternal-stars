@@ -1,0 +1,15 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	<div>
+		<h:panelGroup id="user-table">
+			<ui:include src="/jsf/util/table.xhtml">
+				<ui:param name="value" value="#{adminControls.usersAsTable}"/>
+				<ui:param name="render" value="user-table"/>
+			</ui:include>
+		</h:panelGroup>
+	</div>
+</ui:composition>

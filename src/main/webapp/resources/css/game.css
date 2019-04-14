@@ -79,7 +79,7 @@ a {
     flex-direction: column;
     flex-grow: 1;
     overflow: auto;
-    max-height: 100vh;
+    max-height: 75vh
 }
 .building-list {
     display: flex;
@@ -204,6 +204,10 @@ a {
 .sector-planet-table {
     border-collapse: collapse;
     flex-grow: 1;
+}
+.sector-planet-table a {
+	color: white;
+	margin-right: 0.5em;
 }
 .sector-planet-table thead {
     background-color: darkgrey;

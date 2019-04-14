@@ -1,0 +1,28 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<div class="message-creator">
+	
+		<div class="message-creator-header">
+			<h:outputLabel value="To">
+				<h:inputText value="#{sendMessageRequest.receiverId}"/>
+			</h:outputLabel>
+			
+			<h:outputLabel value="Subject">
+				<h:inputText value="#{sendMessageRequest.subject}"/>
+			</h:outputLabel>
+		</div>
+		
+		<div>
+			<h:inputTextarea  value="#{sendMessageRequest.message}" styleClass="message-input"/>
+		</div>
+		
+		<div>
+			<h:commandButton value="Send" action="#{interactionHandler.user.sendMessage(sendMessageRequest)}"/>
+		</div>
+	</div>
+</ui:composition>

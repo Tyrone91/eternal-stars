@@ -1,0 +1,16 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<div class="collapsible" data-title="Messages received ##{messageControls.totalReceivedMessages}">
+		<h:panelGroup id="received-messages-table">
+			<ui:include src="/jsf/util/table.xhtml">
+				<ui:param name="value" value="#{messageControls.receivedMessages}"/>
+				<ui:param name="render" value="received-messages-table"/>
+			</ui:include>
+		</h:panelGroup>
+	</div>
+</ui:composition>

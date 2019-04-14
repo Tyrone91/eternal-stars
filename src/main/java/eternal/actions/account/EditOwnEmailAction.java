@@ -39,6 +39,7 @@ public class EditOwnEmailAction extends AbstractAction<Boolean, EditEmailRequest
         user.setEmail(request.getEmail());
         userHandler.updateUser(user);
         response.setMessage("Email updated");
+        response.setBad(false);
         return true;
     }
 

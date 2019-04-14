@@ -1,0 +1,20 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<h:outputScript library="js" name="collapsible.js" />
+	
+	<div class="message-center">
+		<div class="collapsible" data-title="Create Message">
+			<ui:include src="/jsf/util/message-sender.xhtml" />
+		</div>
+		
+		<div>
+			<ui:include src="/jsf/user/received-messages.xhtml"/>
+			<ui:include src="/jsf/user/send-messages.xhtml"/>
+		</div>
+	</div>
+</ui:composition>

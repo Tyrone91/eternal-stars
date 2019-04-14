@@ -1,0 +1,63 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	<ui:param name="render" value="#{empty render ? '@all' : render}" />
+	<div class="sortable-table-wrapper">
+		<table class="sortable-table">
+			<thead>
+				<ui:repeat var="colHead" value="#{value.headers}">
+					
+					<th>
+						<ui:param name="icon2" value="#{colHead.reverseSorted ? 'fas fa-sort-down' : 'fas fa-sort-up'}"/>
+						<ui:param name="icon" value="#{colHead.selected ? icon2 : 'fas fa-sort'}"/>
+						<h:commandLink action="#{colHead.sort()}" value="#{colHead.name}" rendered="#{colHead.sortable}" styleClass="#{icon}">
+							<f:ajax render="#{render}" execute="@this"/>
+						</h:commandLink>
+						<h:outputText value="#{colHead.name}" rendered="#{not colHead.sortable}" />
+					</th>
+				</ui:repeat>
+				<h:panelGroup rendered="#{value.actionRendered}"><th></th></h:panelGroup>
+			</thead>
+			<tbody>
+				<ui:repeat var="row" value="#{value.rows}">
+					<tr>
+						<ui:repeat var="column" value="#{row.columns}">
+							<td>
+			    				<h:outputText value="#{column.value}"/>
+			    			</td>
+						</ui:repeat>
+						<h:panelGroup rendered="#{value.actionRendered}">
+							<td>
+								<ui:repeat var="action" value="#{row.actions}">
+					    				<h:commandLink action="#{action.onClick()}" styleClass="#{action.icon} sortable-table-action" title="#{action.title}">
+					    					<f:ajax render="@all" execute="@this"/>
+					    				</h:commandLink>
+								</ui:repeat>
+							</td>
+						</h:panelGroup>
+					</tr>
+				</ui:repeat>
+			</tbody>
+		</table>
+		<div class="sortable-table-controls">
+			<span class="control-handle"><h:commandLink value="&lt;&lt;" action="#{value.goPageLeft()}"><f:ajax render="#{render}" execute="@this"/></h:commandLink></span>
+			<span class="fill direct-page">
+				<ui:repeat var="page" value="#{value.possiblePages}">
+					
+					<h:commandLink value="#{page+1}" action="#{value.setSelectedPage(page)}" rendered="#{value.isSelectedPage(page)}" styleClass="selected-table-page">
+						<f:ajax render="#{render}" execute="@this"/>
+					</h:commandLink>
+					
+					<h:commandLink value="#{page+1}" action="#{value.setSelectedPage(page)}" rendered="#{not value.isSelectedPage(page)}">
+						<f:ajax render="#{render}" execute="@this"/>
+					</h:commandLink>
+					
+				</ui:repeat>
+			</span>
+			<span class="control-handle"><h:commandLink value="&gt;&gt;" action="#{value.goPageRight()}"><f:ajax render="#{render}" execute="@this"/></h:commandLink></span>
+		</div>
+	</div>
+</ui:composition>

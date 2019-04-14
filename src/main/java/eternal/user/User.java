@@ -12,12 +12,15 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import eternal.game.control.GameAccount;
 import eternal.mangement.GameAccountHandler;
+import eternal.persistence.data.MessageTO;
 
 @Entity
 public class User implements Serializable {
@@ -36,6 +39,12 @@ public class User implements Serializable {
     @ManyToMany
     @JoinTable
     private Set<UserRole> roles;
+    
+    @OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
+    private Set<MessageTO> sendMessages = new HashSet<>();
+    
+    @OneToMany(mappedBy = "receiver", fetch = FetchType.EAGER)
+    private Set<MessageTO> receivedMessages = new HashSet<>(); 
     
     private transient GameAccount gameAccount;
     
@@ -138,5 +147,29 @@ public class User implements Serializable {
     
     public List<UserRole> getRolesAsList() {
         return new ArrayList<>(getRoles());
+    }
+    
+    public boolean removeSendMessage(MessageTO message) {
+        return this.sendMessages.remove(message);
+    }
+    
+    public boolean addSendMessage(MessageTO message) {
+        return this.sendMessages.add(message);
+    }
+    
+    public boolean removeReceivedMessage(MessageTO message) {
+        return this.receivedMessages.remove(message);
+    }
+    
+    public boolean addReceivedMessage(MessageTO message) {
+        return this.receivedMessages.add(message);
+    }
+    
+    public Set<MessageTO> getSendMessages() {
+        return this.sendMessages;
+    }
+    
+    public Set<MessageTO> getReceivedMessages() {
+        return this.receivedMessages;
     }
 }

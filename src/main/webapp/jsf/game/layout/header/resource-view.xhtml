@@ -1,0 +1,28 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	<h:panelGrid styleClass="user-resource-header">
+	    	
+	    	
+	    	<h:panelGroup styleClass="resource-view" id="resource-view">
+	    		 
+	    		<h:outputText value="Metal: #{gameControls.planetMetal} (+#{gameControls.planetMetalGain})" styleClass="resource resource-metal"/>
+	    		<h:outputText value="Crystal: #{gameControls.planetCrystal} (+#{gameControls.planetCrystalGain})" styleClass="resource resource-crystal"/>
+	    		<h:outputText value="Energy: #{gameControls.planetEnergy} (+#{gameControls.planetEnergyGain})" styleClass="resource resource-energy"/>
+	    		 
+	    		 
+	    		<!--
+	    		<h:outputText value="Metal: #{gameControls.planetMetal}" styleClass="resource resource-metal"/>
+	    		<h:outputText value="Crystal: #{gameControls.planetCrystal}" styleClass="resource resource-crystal"/>
+	    		<h:outputText value="Energy: #{gameControls.planetEnergy}" styleClass="resource resource-energy"/>
+	    		-->
+	    		
+	    		<h:commandButton id="placeholder-resource-pull-button" styleClass="hidden">
+	    			<f:ajax render="resource-view quick-message-view" execute="@this" onerror="stopPullingResources"/>
+	    		</h:commandButton>
+	    	</h:panelGroup>
+    	</h:panelGrid>
+</ui:composition>

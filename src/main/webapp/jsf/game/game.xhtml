@@ -4,22 +4,18 @@
  	xmlns:h="http://java.sun.com/jsf/html"
   	xmlns:ui="http://java.sun.com/jsf/facelets"
 	>
+	
 	<h:outputScript library="js" name="main.js" />
+	
 	<div class="fit-to-parent flex-column game-body">
 		
 		<h:panelGroup styleClass="game-header" id="game-header">
-			<ui:include src="/game-header.xhtml"/>
+			<ui:include src="/jsf/game/layout/header/header.xhtml"/>
 	    </h:panelGroup>
 	    
 	    <h:panelGroup styleClass="game-content-wrapper">
 	    
-	    	<h:panelGroup styleClass="game-control-menu">  			
-	    		<ui:repeat var="control" value="#{gameControls.controls}">
-	    			<h:commandButton value="#{control.label}" action="#{gameControls.setCurrentFocus(control)}">
-						<f:ajax execute="@this" render="main-content"/>
-					</h:commandButton>
-	    		</ui:repeat>    	
-	    	</h:panelGroup>
+	    	<ui:include src="/jsf/game/layout/menu.xhtml" />
 	    		
 	    	<h:panelGroup styleClass="main-content" id="main-content" >
 	    		<ui:include src="#{gameControls.currentFocus.outcome}"/>

@@ -1,4 +1,4 @@
-let RESOURCE_PULL = true;
+RESOURCE_PULL = true;
 
 function pullResources() {
 	const button = document.getElementById("placeholder-resource-pull-button");
@@ -6,7 +6,7 @@ function pullResources() {
 	const request = () => {
 		button.click();
 		if(RESOURCE_PULL) {
-			setTimeout(request,500);
+			setTimeout(request,500); //TODO: add pull back
 		}
 	};
 
@@ -18,8 +18,8 @@ function stopPullingResources() {
 }
 
 window.addEventListener("load", event => {
-	console.log("found");
 	pullResources();
 	
 });
+
 

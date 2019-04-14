@@ -7,8 +7,8 @@
 	
 	<ui:param name="name" value="#{empty name ? 'OK': name}"/>
 	<ui:param name="name" value="#{empty outcome ? 'MISSING_NAVIGATION_OUTCOME': name}"/>
-	<h:commandButton action="#{pageControl.view(outcome)}" value="#{name}" styleClass="navigate-button">
+	<h:commandButton action="#{pageControl.view(outcome)}" value="#{name}" styleClass="navigate-button" type="submit" >
 		<f:ajax render="@form" execute="@form"/>
 	</h:commandButton>
-	
+	<!-- onclick="document.getElementById('main-form').submit()" -->
 </ui:composition>

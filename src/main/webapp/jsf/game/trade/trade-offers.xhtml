@@ -1,0 +1,28 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+	
+	<div>
+    	<div class="collapsible" data-title="Offers send (##{tradeControls.totalOffersSend})">
+    		<h:panelGroup id="send-offers-table">
+	    		<ui:include src="/jsf/util/table.xhtml">
+					<ui:param name="value" value="#{tradeControls.sendOffersTable}"/>
+					<ui:param name="render" value="send-offers-table"/>
+				</ui:include>
+			</h:panelGroup>
+    	</div>
+    	
+    	<div class="collapsible" data-title="Offers received (##{tradeControls.totalOffersReceived})">
+    		<h:panelGroup id="received-offers-table">
+	    		<ui:include src="/jsf/util/table.xhtml">
+					<ui:param name="value" value="#{tradeControls.receivedOffersTable}"/>
+					<ui:param name="render" value="received-offers-table"/>
+				</ui:include>
+			</h:panelGroup>
+    	</div>
+   	</div>
+	
+</ui:composition>

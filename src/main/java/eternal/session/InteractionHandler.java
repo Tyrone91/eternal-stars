@@ -35,6 +35,7 @@ import eternal.requests.LoginRequest;
 import eternal.requests.RegistrationRequest;
 import eternal.requests.SendTradeOfferRequest;
 import eternal.session.interaction.TradeInteractionHandler;
+import eternal.session.interaction.UserInteractionHandler;
 import eternal.user.User;
 import eternal.user.UserRight;
 import eternal.user.UserRole;
@@ -110,6 +111,9 @@ public class InteractionHandler implements Serializable {
     private TradeInteractionHandler tradeInteractionHandler;
     
     @Inject
+    private UserInteractionHandler userInteractionHandler;
+    
+    @Inject
     private PageControl pageControl;
     
     public Optional<User> login(LoginRequest request) {
@@ -144,6 +148,11 @@ public class InteractionHandler implements Serializable {
     public String logoutWithRedirect() {
         logout();
         return "/login.xhtml?faces-redirect=true";
+    }
+    
+    public String logoutWithRedirectNEW() {
+        logout();
+        return "/index.xhtml?faces-redirect=true";
     }
     
     public Optional<User> register(RegistrationRequest request) {
@@ -244,5 +253,9 @@ public class InteractionHandler implements Serializable {
     
     public TradeInteractionHandler getTrade() {
         return tradeInteractionHandler;
+    }
+    
+    public UserInteractionHandler getUser() {
+        return this.userInteractionHandler;
     }
 }

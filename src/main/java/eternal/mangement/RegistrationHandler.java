@@ -19,6 +19,8 @@ public class RegistrationHandler {
     @Inject
     private UserHandler userHandler;
     
+    private static final String ACCEPTED_USERNAMES = "^[a-zA-Z0-9_]*$";
+    
     public RegistrationHandler() {}
     
     private boolean allInformationProvided(RegistrationRequest request) {
@@ -31,9 +33,20 @@ public class RegistrationHandler {
         
     }
     
+    
+    
     public Optional<User> register(RegistrationRequest request) {
+        return register(request, false);
+    }
+    
+    public Optional<User> register(RegistrationRequest request, boolean skipNameValidation) {
         if(!allInformationProvided(request)) {
             request.setResponse("Not all information provided");
+            return Optional.empty();
+        }
+        
+        if(!skipNameValidation && !request.getUsername().matches(ACCEPTED_USERNAMES)) {
+            request.setResponse("The username contains illegal characters. Please only use letters, numbers and '_'");
             return Optional.empty();
         }
         

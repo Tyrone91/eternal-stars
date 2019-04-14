@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import eternal.session.SessionContext;
 import eternal.session.ViewControl;
+import eternal.user.User;
 
 public class BaseInteractionHandler implements Serializable {
 
@@ -16,4 +17,8 @@ public class BaseInteractionHandler implements Serializable {
     
     @Inject
     protected ViewControl viewControl;
+    
+    protected User user() {
+        return this.sessionContext.getUser();
+    }
 }

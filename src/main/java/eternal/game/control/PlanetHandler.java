@@ -70,6 +70,7 @@ public class PlanetHandler {
     }
     
     public boolean updatePlanet(Planet p) {
+        p.beforeSave();
         return planetDAO.updatePlanet(p);
     }
 }

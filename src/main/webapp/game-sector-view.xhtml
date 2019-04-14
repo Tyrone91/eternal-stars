@@ -30,9 +30,17 @@
 	    			
 	    			<h:column>
 		    			<f:facet name="header">Action</f:facet>
-		    			<h:commandButton value="Trade" action="#{tradeOfferBuilder.tradeWith(sectorViewHandler.getUserOfPlanet(planet))}">
+		    			
+		    			<ui:param name="user" value="#{sectorViewHandler.getUserOfPlanet(planet)}" />
+		    			 
+		    			<h:commandLink value="Trade" title="Trade" action="#{tradeOfferBuilder.tradeWith(user)}" styleClass="fas fa-balance-scale">
 		    				<f:ajax execute="@form" render="main-content"/>
-		    			</h:commandButton>
+		    			</h:commandLink>
+		    			
+		    			<h:commandLink value="Message" title="Send message" action="#{messageControls.messageTo(user)}" styleClass="far fa-envelope">
+		    				<f:ajax execute="@form" render="main-content"/>
+		    			</h:commandLink>
+		    			
 	    			</h:column>
     	
     			</h:dataTable>

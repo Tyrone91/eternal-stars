@@ -1,0 +1,23 @@
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+  	xmlns:f="http://java.sun.com/jsf/core"      
+ 	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+
+	<h:panelGroup styleClass="user-view" id="header-user-information">
+   		<h:outputText value="Greetings "/>
+   		<h:outputText value="#{viewControl.displayName}!"/>
+   		<h:panelGroup>
+   		
+   			<h:commandLink value="logout" action="#{interactionHandler.logoutWithRedirectNEW()}"/>
+   			
+   			<h:panelGroup rendered="#{viewControl.hasRightByName('ADMIN_CONTROLS')}">
+   				<ui:include src="/jsf/util/navigate.xhtml"> 
+					<ui:param name="outcome" value="admin" />
+					<ui:param name="name" value="Admin" />
+				</ui:include>
+			</h:panelGroup>
+   		</h:panelGroup>
+   	</h:panelGroup>
+</ui:composition>

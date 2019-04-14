@@ -21,19 +21,19 @@ import eternal.user.UserRole;
 public class DemoInit {
     
     @Inject
-    UserRoleHandler userRoleHandler;
+    private UserRoleHandler userRoleHandler;
     
     @Inject
-    UserRoleAccessObject userRoleDOA;
+    private UserRoleAccessObject userRoleDOA;
     
     @Inject
-    InteractionHandler interactionHandler;
+    private InteractionHandler interactionHandler;
     
     @Inject
     private GameAccountCreator accountCreator;
     
     @Inject
-    UserHandler userHandler;
+    private UserHandler userHandler;
 
     @PostConstruct
     public void init() {

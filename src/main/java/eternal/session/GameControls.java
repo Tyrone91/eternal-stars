@@ -40,9 +40,10 @@ public class GameControls implements Serializable {
     public final static Control OVERVIEW = new Control("Overview", "/game-overview.xhtml");
     public final static Control GALAXIE = new Control("Galaxie", "/game-sector-view.xhtml");
     public final static Control BUILDINGS = new Control("Buildings", "/game-building.xhtml");
-    public final static Control TRADE = new Control("Trade", "/game-trade-offer.xhtml");
-    public final static Control ACCOUNT = new Control("Account", "/game-edit-account.xhtml");
-    public final static Control TRADE_OFFERS = new Control("Trade Requests", "/game-trade-offer-overview.xhtml");
+    public final static Control TRADE = new Control("Trade", "/jsf/game/trade/trade.xhtml");
+    public final static Control ACCOUNT = new Control("Account", "/jsf/user/account-edit.xhtml");
+    public final static Control MESSAGES = new Control("Messages", "/jsf/user/message-center.xhtml");
+    public final static Control VIEW_MESSAGE = new Control("NO_MENU_ENTRY", "/jsf/util/message-viewer.xhtml");
 
     
     private static List<Control> ALL_CONTROLS = Arrays.asList(
@@ -51,7 +52,7 @@ public class GameControls implements Serializable {
             BUILDINGS,
             TRADE,
             ACCOUNT,
-            TRADE_OFFERS);
+            MESSAGES);
     
     private Control currentFocus;
     

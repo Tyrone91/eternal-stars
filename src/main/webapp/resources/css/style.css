@@ -44,9 +44,14 @@ form label {
 	margin-bottom: 0.1em;
 }
 
+#trade-offer-form label {
+	width: initial;
+}
+
+form textarea,
 form input[type="password"],
 form input[type="text"]{
-	display: inlie-block;
+	display: inline-block;
 	padding: 0.5em;
 	width: 12em;
 	margin-left: 0.5em;
@@ -129,10 +134,6 @@ form input[type="text"]{
 	margin-left: -12em;
 }
 
-.login-form input[type="submit"] {
-	padding: 0.5em;
-	width: 12em;
-}
 .navigate-button {
 	border: none;
 	text-decoration: underline;
@@ -145,11 +146,24 @@ form input[type="text"]{
 	cursor: pointer;
 }
 .registration-submit,
-.login-submit {
+.login-submit,
+.submit-link {
 	color: white;
 	font-size: 1.1em;
 	margin-top: 0.5em;
+	padding: 0px;
+	background: none;
+	border: none;
+	text-decoration: underline;
 }
+
+.registration-submit:hover,
+.login-submit:hover,
+.submit-link:hover {
+	cursor: pointer;
+	color: #01bdff;
+}
+
 .view-registration-page {
 	margin-bottom: 2em;
 }
@@ -158,4 +172,92 @@ form input[type="text"]{
 .headline-subtitle {
 	font-size: 0.8em;
 	margin-bottom: 2em;
+}
+.sortable-table {
+	border-collapse: collapse;
+}
+
+.sortable-table th,
+.sortable-table td {
+	padding: 0.5em;
+}
+.sortable-table th {
+	border-bottom: 2px solid black;
+}
+.sortable-table td {
+	border-bottom: 1px solid black;
+}
+.sortable-table tbody tr:nth-child(even) {
+	background-color: lightgrey;
+}
+.selected-table-page {
+	color: red;
+}
+.sortable-table-controls {
+	display: inline-flex;
+	flex-direction: row;
+	justify-content:  space-around;
+}
+
+.sortable-table-controls .control-handle {
+	flex-grow: 1;
+}
+.sortable-table-controls .direct-page > a{
+	margin-left: 5px;
+}
+.sortable-table-controls .control-handle:last-child {
+	text-align: left;
+}
+.sortable-table-controls .control-handle:first-child {
+	text-align: right;
+}
+.sortable-table-controls > .fill {
+	margin: 0em 0.5em;
+}
+.sortable-table-wrapper {
+	display: inline-flex;
+	flex-direction: column;
+}
+.sortable-table-action:not(:last-child) {
+	margin-right: 0.5em;
+}
+.sortable-table-action {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+.hide {
+	display: none;
+}
+
+.collapsible {
+	border-bottom: 2px solid black;
+	background-color: lightgrey;
+	box-shadow: 1px 1px 5px black;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	margin-top: 0.5em;
+}
+.collapsible-title,
+.collapsible {
+
+}
+.collapsible-title {
+	border: 2px solid black;
+	font-size: 1.2em;
+	display: block;
+	padding: 0.5em;
+	color: black;
+	font-weight: bold;
+	box-shadow: 1px 1px 5px black;
+	margin-top: 0.3em;
+	margin-left: 0.3em;
+	margin-right: 0.3em;
+	cursor: pointer;
+}
+.collapsible-title:hover {
+	border: 2px solid royalblue;
+}
+.collapsible-title::before {
+	color: royalblue;
+	margin-right: 1em;
 }

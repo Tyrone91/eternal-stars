@@ -59,6 +59,7 @@ public class UpgradeBuildingAction extends AbstractAction<Boolean, Building> {
         
         planetHandler.updatePlanet(planet);
         requestResponse.setMessage("Upgrading building");
+        requestResponse.setBad(false);
         return true;
     }
 

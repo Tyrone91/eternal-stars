@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,6 +40,7 @@ public class Planet implements Updatable {
     
     private int planetPosition;
     
+    @Embedded
     private ResourceTO resources = new ResourceTO();
     
     private int sectorId;
@@ -68,7 +70,7 @@ public class Planet implements Updatable {
     
     @PreUpdate
     @PrePersist
-    private void beforeSave() {
+    public void beforeSave() {
         this.resources.updateFrom(planetResources);
     }
     
